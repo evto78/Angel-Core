@@ -193,3 +193,11 @@ Received Import Request.
 Start importing Assets/Scenes/New Animator Controller.controller using Guid(241bcaf7a386d93469caa3be48ce5330) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6b6e93c67a92e04581782aeb744c0f6') in 0.001677 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 65897.383257 seconds.
+  path: Assets/Scenes/Boss Testing.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Boss Testing.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a244394f9dc7a44c857ef770ef32d3a3') in 0.010245 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
