@@ -33,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
         //find the rigidbody component
         rb = GetComponent<Rigidbody>();
-
+        
         //reset jumps
         jumpsLeft = jumps;
+        jumps = 0;
     }
 
     void Update()
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //if you are on the ground and you have jumps left, then jump
-            if (onGround && jumpsLeft > 0)
+            if (onGround || jumpsLeft > 0)
             {
                 Jump();
                 jumpsLeft--;
@@ -139,4 +140,14 @@ public class PlayerMovement : MonoBehaviour
             onGround = false;
         }
     }
+        private void OnCollisionEnter(Collision collision) 
+    {
+       if(collision.gameObject.name == "Item") 
+        {
+            Destroy(collision.gameObject);
+            jumps += 1;
+            Debug.Log("+ 1 jump");
+        }
+    }
+    
 }

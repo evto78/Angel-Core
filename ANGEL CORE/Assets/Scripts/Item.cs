@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -10,6 +11,6 @@ public class Item : MonoBehaviour
     {
         player = GameObject.Find("Player");
     }
-
     
+
 }
