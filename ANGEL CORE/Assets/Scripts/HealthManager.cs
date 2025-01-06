@@ -14,7 +14,7 @@ public class HealthManager : MonoBehaviour
     void DealDamage(int dmgAmt)
     {
         curHealth -= dmgAmt;
-        if(curHealth > 0) {curHealth = 0;}
+        if(curHealth < 0) {curHealth = 0;}
     }
     void Heal(int healAmt)
     {
