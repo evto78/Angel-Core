@@ -218,7 +218,6 @@ GameObject:
   - component: {fileID: 2649639200615358005}
   - component: {fileID: 7859986572201916344}
   - component: {fileID: 4099131550064654898}
-  - component: {fileID: 3951270315828146394}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -312,27 +311,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &3951270315828146394
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2415905113448528905}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 628b7aaabb902d74fa391c61564df62c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2851574346654591212
 GameObject:
   m_ObjectHideFlags: 0
@@ -11068,9 +11046,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77385c8d3957886479791e2b4f80feb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpinnerAnimator: {fileID: 3951270315828146394}
   gunCharge: {fileID: 8191489808423920165}
   gunFire: {fileID: 1140538435402167838}
+  gunSpinner: {fileID: 2415905113448528905}
   maxCharge: 3
 --- !u!114 &6865758853297763884
 MonoBehaviour:
@@ -11086,6 +11064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1949799771142857787}
   atkSpd: 1
+  hitEffect: {fileID: 1940651747947740006, guid: e059f718739b4074797ac1bdcbc48408, type: 3}
 --- !u!120 &780894315545997932
 LineRenderer:
   serializedVersion: 2

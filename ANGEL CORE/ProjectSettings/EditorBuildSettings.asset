@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Movement Testing.unity
     guid: 7885ee9f9ac207b47bb1d578f95d7a08
+  - enabled: 1
+    path: Assets/Scenes/Boss Testing.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

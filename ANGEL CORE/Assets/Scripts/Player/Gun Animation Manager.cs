@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GunAnimationManager : MonoBehaviour
 {
-    [SerializeField] Animator SpinnerAnimator;
     [SerializeField] ParticleSystem gunCharge;
     [SerializeField] ParticleSystem gunFire;
+    public GameObject gunSpinner;
 
     float charge;
     public float maxCharge;
@@ -14,7 +14,7 @@ public class GunAnimationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpinnerAnimator.SetBool("Spinning", false);
+
     }
 
     // Update is called once per frame
@@ -25,24 +25,24 @@ public class GunAnimationManager : MonoBehaviour
 
     void Spinner()
     {
-        SpinnerAnimator.ResetTrigger("Fire");
+        gunSpinner.transform.Rotate(Vector3.right * charge * 500f * Time.deltaTime);
+        gunSpinner.transform.Rotate(Vector3.right * 50f * Time.deltaTime);
 
         if (Input.GetMouseButton(0))
         {
-            SpinnerAnimator.SetBool("Spinning", true);
             gunCharge.Emit(Mathf.FloorToInt(charge * 100f * Time.deltaTime));
             charge += Time.deltaTime;
             if(charge > maxCharge) { charge = maxCharge; }
         }
         else
         {
-            SpinnerAnimator.SetBool("Spinning", false);
+
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            SpinnerAnimator.SetTrigger("Fire");
-            gunFire.Play();
+            //gunFire.Play();
+            charge = 0;
         }
     }
 }

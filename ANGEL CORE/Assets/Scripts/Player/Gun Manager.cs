@@ -12,6 +12,8 @@ public class GunManager : MonoBehaviour
 
     public float atkSpd;
 
+    public GameObject hitEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,12 @@ public class GunManager : MonoBehaviour
 
             RenderLine();
 
+            if (hit.transform.gameObject.tag == "boss core")
+            {
+                GameObject spawnedEffect = Instantiate(hitEffect);
+                spawnedEffect.transform.position = hit.point;
+                Destroy(spawnedEffect, 3f);
+            }
         }
         else
         {
