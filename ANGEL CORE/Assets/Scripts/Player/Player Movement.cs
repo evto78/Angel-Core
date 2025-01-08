@@ -15,11 +15,14 @@ public class PlayerMovement : MonoBehaviour
     public int jumps;
     int jumpsLeft;
     //dash
-    private bool canDash = true;
-    private bool isDashing;
-    private float dashForce = 10f;
-    private float dashTime = 0.5f;
-    private float dashCooldown = 1f;
+    public bool useNewDash;
+    float dashTimer;
+
+    bool canDash = true;
+    bool isDashing;
+    public float dashForce = 10f;
+    public float dashTime = 0.5f;
+    public float dashCooldown = 1f;
 
     bool onGround;
 
@@ -58,9 +61,14 @@ public class PlayerMovement : MonoBehaviour
         GetInput();
 
         //limit velocity
-        if (rb.velocity.magnitude > maxSpeed && isDashing == false)
+        if (rb.velocity.magnitude > maxSpeed && (isDashing == false || useNewDash == true))
         {
-            rb.velocity = rb.velocity / 1.1f;
+            rb.velocity = rb.velocity / (1f + Time.deltaTime);
+
+            if(rb.velocity.magnitude > maxSpeed * 3f)
+            {
+                rb.velocity = rb.velocity / (1.05f + Time.deltaTime);
+            }
         }
     }
 
@@ -85,7 +93,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            StartCoroutine(Dash());
+            if (useNewDash)
+            {
+                NewDash();
+            }
+            else
+            {
+                StartCoroutine(Dash());
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -110,7 +125,14 @@ public class PlayerMovement : MonoBehaviour
         {
             sparkParticles.GetComponent<ParticleSystem>().emissionRate = 0;
         }
-        
+
+        //Update Timers
+        if (useNewDash)
+        {
+            dashTimer -= Time.deltaTime;
+            if (dashTimer < 0) { canDash = true; }
+            if (dashTimer < dashTime) { isDashing = false; }
+        }
     }
 
     void Move(Vector3 dir)
@@ -118,6 +140,20 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(dir * speed * Time.deltaTime);
     }
     
+    void NewDash()
+    {
+        canDash = false;
+        isDashing = true;
+        dashTimer = dashCooldown;
+
+        // gather what buttons the player is pressing. Horizontal is (-1, A) (1, D), Vertical is (-1, S) (1, W).
+        Vector3 inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // this makes sure holding "A" and "W" wont give you double the boost
+        inputs.Normalize();
+        // the new velocity is the multitude of the old one * dashforce (reduced for now) and then * to our inputs relative to our rotation.
+        rb.velocity = ((transform.right * inputs.x) + (transform.forward * inputs.y)) * (dashForce / 4f) * rb.velocity.magnitude;
+    }
+
     private IEnumerator Dash()
     {
         canDash = false;
@@ -173,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
             onGround = false;
         }
     }
-        private void OnCollisionEnter(Collision collision) 
+    private void OnCollisionEnter(Collision collision) 
     {
        if(collision.gameObject.name == "Item") 
         {

@@ -713,6 +713,10 @@ PrefabInstance:
       value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 1271278614748567115, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: useNewDash
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271278614748567115, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: sensitivity
       value: 5
       objectReference: {fileID: 0}
