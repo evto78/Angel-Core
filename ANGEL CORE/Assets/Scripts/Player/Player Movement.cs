@@ -177,6 +177,8 @@ public class PlayerMovement : MonoBehaviour
 
     void CamControl()
     {
+        sensitivity = PlayerPrefs.GetFloat("sens");
+
         //get mouse input
         yaw += sensitivity * Input.GetAxis("Mouse X");
         pitch -= sensitivity * Input.GetAxis("Mouse Y");
