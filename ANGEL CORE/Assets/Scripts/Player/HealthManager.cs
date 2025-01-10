@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
+    public bool player = false;
     public int maxHealth;
     public int curHealth;
     void Start()
@@ -24,7 +25,8 @@ public class HealthManager : MonoBehaviour
 
     public void Death()
     {
-        Destroy(gameObject);
+        if (!player){Destroy(gameObject);}
+        //player death state 
     }
 
 }

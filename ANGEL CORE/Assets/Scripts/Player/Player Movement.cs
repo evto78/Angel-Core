@@ -113,10 +113,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 NewDash();
             }
-            else
-            {
-                StartCoroutine(Dash());
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -194,21 +190,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = ((transform.right * inputs.x) + (transform.forward * inputs.y)) * (dashForce / 4f) * rb.velocity.magnitude;
     }
 
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        float originGravity = -9.81f;
-        Physics.gravity = new Vector3(0,0,0);
-        rb.velocity = new Vector3 (transform.forward.x * dashForce, 0, transform.forward.z * dashForce);
-        yield return new WaitForSeconds(dashTime);
-        rb.velocity = Vector3.zero;
-        Physics.gravity = new Vector3(0,originGravity,0);
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
-        isDashing = false;
-        Debug.Log("dashing");
-    }
 
     void Slam()
     {
