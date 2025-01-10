@@ -10594,6 +10594,7 @@ GameObject:
   - component: {fileID: 6141093740827589359}
   - component: {fileID: 5123544683939306300}
   - component: {fileID: 6942711139353833302}
+  - component: {fileID: 1489293390775102950}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -10614,9 +10615,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9139630557461657535}
   - {fileID: 9220728332752352963}
   - {fileID: 5659483638543021591}
-  - {fileID: 9139630557461657535}
   - {fileID: 4192194442402507645}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10636,11 +10637,12 @@ MonoBehaviour:
   speed: 1500
   jumpForce: 500
   jumps: 1
-  useNewDash: 0
+  useNewDash: 1
+  slamForce: 50
   dashForce: 10
   dashTime: 0.5
-  dashCooldown: 1
-  sensitivity: 4
+  dashCooldown: 1.5
+  sensitivity: 5
   cam: {fileID: 116462689647373106}
   sparkParticles: {fileID: 0}
   jumpSparkParticles: {fileID: 0}
@@ -10670,7 +10672,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &5123544683939306300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10698,6 +10700,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityText: {fileID: 8578652669479313262}
+--- !u!136 &1489293390775102950
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6602857866310753672}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6761514875177890854
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,10 +46,7 @@ public class GunManager : MonoBehaviour
 
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, float.MaxValue))
         {
-
             linePoints.Add(hit.point);
-
-            RenderLine();
 
             if (hit.transform.gameObject.tag == "boss core")
             {
@@ -57,6 +54,12 @@ public class GunManager : MonoBehaviour
                 spawnedEffect.transform.position = hit.point;
                 Destroy(spawnedEffect, 3f);
             }
+            if(hit.transform.gameObject.tag == "boss ring")
+            {
+                linePoints.Add(new Vector3(Random.Range(-4, 4), Random.Range(-4, 4), Random.Range(-4, 4)) * 1000f);
+            }
+
+            RenderLine();
         }
         else
         {

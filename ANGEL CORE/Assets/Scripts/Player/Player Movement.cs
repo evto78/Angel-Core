@@ -17,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     //dash
     public bool useNewDash;
     float dashTimer;
+    //slam
+    public float slamForce;
+    bool isSlamming;
+    float slamJumpBoost; //how much jumping after slamming will boost the jump, based on velocity when hitting the ground
+    float slamSpeed; //your velocity when the slam ended
+    float slamBoostTimer; //time until slamboost ends
 
     bool canDash = true;
     bool isDashing;
@@ -27,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     bool onGround;
 
     Rigidbody rb;
+    TrailRenderer tr;
 
     // cam control variables;
     public float sensitivity;
@@ -48,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
         //find the rigidbody component
         rb = GetComponent<Rigidbody>();
-        
+        //find the line renderer
+        tr = GetComponentInChildren<TrailRenderer>();
         //reset jumps
         jumpsLeft = jumps;
         jumps = 0;
@@ -61,14 +69,22 @@ public class PlayerMovement : MonoBehaviour
         GetInput();
 
         //limit velocity
-        if (rb.velocity.magnitude > maxSpeed && (isDashing == false || useNewDash == true))
+        Vector3 horVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        if (horVel.magnitude > maxSpeed && (isDashing == false || useNewDash == true))
         {
-            rb.velocity = rb.velocity / (1f + Time.deltaTime);
+            horVel = horVel / (1f + Time.deltaTime);
 
-            if(rb.velocity.magnitude > maxSpeed * 3f)
+            if(horVel.magnitude > maxSpeed * 3f)
             {
-                rb.velocity = rb.velocity / (1.05f + Time.deltaTime);
+                horVel = horVel / (1.05f + Time.deltaTime);
             }
+            // repeated on purpose
+            if (horVel.magnitude > maxSpeed * 3f)
+            {
+                horVel = horVel / (1.05f + Time.deltaTime);
+            }
+
+            rb.velocity = new Vector3(horVel.x, rb.velocity.y, horVel.z);
         }
     }
 
@@ -108,10 +124,21 @@ public class PlayerMovement : MonoBehaviour
             //CHANGED if you are on the ground OR you have jumps left, then jump
             if (onGround || jumpsLeft > 0)
             {
+                isSlamming = false;
                 Jump();
+                slamBoostTimer = 0;
                 jumpsLeft--;
                 jumpSparkParticles.transform.position = transform.position + (Vector3.up * 0.1f);
                 jumpSparkParticles.GetComponent<ParticleSystem>().Play();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if (!onGround || !isSlamming)
+            {
+                Slam();
+                slamBoostTimer = 0.1f;
             }
         }
 
@@ -126,12 +153,25 @@ public class PlayerMovement : MonoBehaviour
             sparkParticles.GetComponent<ParticleSystem>().emissionRate = 0;
         }
 
+        //slam logic
+        if (isSlamming) { tr.emitting = false; }
+        else { tr.emitting = true; }
+        if(isSlamming && !onGround) { slamJumpBoost = rb.velocity.y * -1f; }
+        if(isSlamming && onGround)
+        {
+            isSlamming = false;
+        }
+
         //Update Timers
         if (useNewDash)
         {
             dashTimer -= Time.deltaTime;
             if (dashTimer < 0) { canDash = true; }
             if (dashTimer < dashTime) { isDashing = false; }
+        }
+        if (!isSlamming)
+        {
+            slamBoostTimer -= Time.deltaTime;
         }
     }
 
@@ -170,14 +210,28 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("dashing");
     }
 
+    void Slam()
+    {
+        isSlamming = true;
+        rb.velocity = Vector3.down * slamForce;
+    }
+
     void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce);
+        if(slamBoostTimer > 0 && !isSlamming)
+        {
+            rb.AddForce(Vector3.up * jumpForce * (slamJumpBoost / 30f));
+        }
+        else
+        {
+            rb.AddForce(Vector3.up * jumpForce);
+        }
+        
     }
 
     void CamControl()
     {
-        sensitivity = PlayerPrefs.GetFloat("sens");
+        sensitivity = PlayerPrefs.GetFloat("sens") / 10f;
 
         //get mouse input
         yaw += sensitivity * Input.GetAxis("Mouse X");

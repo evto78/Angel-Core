@@ -376,9 +376,10 @@ GameObject:
   - component: {fileID: 661679678}
   - component: {fileID: 661679677}
   - component: {fileID: 661679676}
+  - component: {fileID: 661679679}
   m_Layer: 0
   m_Name: ring
-  m_TagString: Untagged
+  m_TagString: boss ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -468,6 +469,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661679674}
+  m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
+--- !u!64 &661679679
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661679674}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -709,18 +732,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1271278614748567115, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-      propertyPath: speed
-      value: 1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271278614748567115, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-      propertyPath: useNewDash
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271278614748567115, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-      propertyPath: sensitivity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271278614748567115, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: sparkParticles
       value: 
       objectReference: {fileID: 1789321351}
@@ -728,14 +739,6 @@ PrefabInstance:
       propertyPath: jumpSparkParticles
       value: 
       objectReference: {fileID: 1269853016}
-    - target: {fileID: 4824330224952477629, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.5031452
-      objectReference: {fileID: 0}
-    - target: {fileID: 6141093740827589359, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6602857866310753672, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -780,18 +783,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9139630557461657535, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7339628695512697683, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6602857866310753672, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1816244642}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
 --- !u!1 &898284125
 GameObject:
@@ -1048,9 +1043,10 @@ GameObject:
   - component: {fileID: 1053769789}
   - component: {fileID: 1053769788}
   - component: {fileID: 1053769787}
+  - component: {fileID: 1053769790}
   m_Layer: 0
   m_Name: ring
-  m_TagString: Untagged
+  m_TagString: boss ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1140,6 +1136,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053769785}
+  m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
+--- !u!64 &1053769790
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053769785}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
 --- !u!1 &1235634737
 GameObject:
@@ -1259,9 +1277,10 @@ GameObject:
   - component: {fileID: 1253271817}
   - component: {fileID: 1253271816}
   - component: {fileID: 1253271815}
+  - component: {fileID: 1253271818}
   m_Layer: 0
   m_Name: ring
-  m_TagString: Untagged
+  m_TagString: boss ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1351,6 +1370,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253271813}
+  m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
+--- !u!64 &1253271818
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253271813}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
 --- !u!1 &1267602830
 GameObject:
@@ -6527,9 +6568,10 @@ GameObject:
   - component: {fileID: 1370002798}
   - component: {fileID: 1370002797}
   - component: {fileID: 1370002796}
+  - component: {fileID: 1370002799}
   m_Layer: 0
   m_Name: ring
-  m_TagString: Untagged
+  m_TagString: boss ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6619,6 +6661,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370002794}
+  m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
+--- !u!64 &1370002799
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370002794}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
 --- !u!1 &1426932927
 GameObject:
@@ -6876,9 +6940,10 @@ GameObject:
   - component: {fileID: 1721049635}
   - component: {fileID: 1721049634}
   - component: {fileID: 1721049633}
+  - component: {fileID: 1721049636}
   m_Layer: 0
   m_Name: ring
-  m_TagString: Untagged
+  m_TagString: boss ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6968,6 +7033,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721049631}
+  m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
+--- !u!64 &1721049636
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721049631}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
 --- !u!1 &1789321351
 GameObject:
@@ -11799,34 +11886,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &1816244637 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6602857866310753672, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
-  m_PrefabInstance: {fileID: 870815263}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1816244642
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816244637}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1868953489
 GameObject:
   m_ObjectHideFlags: 0
@@ -12155,7 +12214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fb02b535f5e874e9d92096fa370486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 3
 --- !u!1 &1952902093
 GameObject:
   m_ObjectHideFlags: 0
@@ -12280,9 +12339,10 @@ GameObject:
   - component: {fileID: 5777711857216567974}
   - component: {fileID: 8631844794389515884}
   - component: {fileID: 8631844794389515885}
+  - component: {fileID: 8631844794389515886}
   m_Layer: 0
   m_Name: ring
-  m_TagString: Untagged
+  m_TagString: boss ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12350,6 +12410,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!64 &8631844794389515886
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7839224797397249977}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6329158148709259305, guid: dcff7f60fe359f146b9b547ca25ce032, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

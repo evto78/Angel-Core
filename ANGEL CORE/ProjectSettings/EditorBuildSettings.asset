@@ -5,10 +5,14 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Movement Testing.unity
-    guid: 7885ee9f9ac207b47bb1d578f95d7a08
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 7466f4d59e6dbf34d9a59c07b0dd50f3
   - enabled: 1
     path: Assets/Scenes/Boss Testing.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  m_configObjects: {}
+  - enabled: 0
+    path: Assets/Scenes/Movement Testing.unity
+    guid: 7885ee9f9ac207b47bb1d578f95d7a08
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 5f9e4ba0d2d3a5143a4e95b48be1dc73, type: 2}
