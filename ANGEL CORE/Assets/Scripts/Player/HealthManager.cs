@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    public int maxHealth = 3;
+    public int maxHealth;
     public int curHealth;
     void Start()
     {
@@ -21,4 +21,10 @@ public class HealthManager : MonoBehaviour
         curHealth += healAmt;
         if(curHealth > maxHealth) {curHealth = maxHealth;}
     }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+
 }
