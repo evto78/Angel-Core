@@ -7165,6 +7165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd1e121b0f6ddc4f8d32a654ca7e8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: 0
   maxHealth: 1
   curHealth: 0
 --- !u!114 &1415441291
@@ -12710,7 +12711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fb02b535f5e874e9d92096fa370486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 10
 --- !u!1 &1952902093
 GameObject:
   m_ObjectHideFlags: 0

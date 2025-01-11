@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class BossMovement : MonoBehaviour
@@ -8,6 +9,7 @@ public class BossMovement : MonoBehaviour
     GameObject pointHolder;
     Vector3 targetLocation;
     bool hasTarget;
+    float timer = 5f;
     public float speed;
 
     void Start()
@@ -21,11 +23,13 @@ public class BossMovement : MonoBehaviour
         {
             points.Add(pointHolder.transform.GetChild(i).position);
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
         GetTarget();
         MoveToTar();
     }
@@ -35,6 +39,7 @@ public class BossMovement : MonoBehaviour
         if (hasTarget)
         {
             transform.position = transform.position + (Vector3.Normalize(targetLocation - transform.position) * speed * Time.deltaTime);
+            Debug.Log("moving" + targetLocation);
         }
     }
 
@@ -47,7 +52,11 @@ public class BossMovement : MonoBehaviour
         }
         if (Vector3.Distance(targetLocation, transform.position) < 1f)
         {
-            hasTarget = false;
+            timer -= Time.deltaTime;
+
+            if(timer <= 0) {hasTarget = false; timer = 5f;}
         }
+
+
     }
 }
