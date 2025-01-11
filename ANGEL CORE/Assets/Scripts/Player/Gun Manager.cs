@@ -4,80 +4,31 @@ using UnityEngine;
 
 public class GunManager : MonoBehaviour
 {
-    LineRenderer lr;
-    public Transform firePoint;
+    public GameObject gunHolder;
 
-    List<Vector3> linePoints = new List<Vector3>();
-    float lineTimer;
-
-    public float atkSpd;
-
-    public GameObject hitEffect;
+    public GameObject leftHand;
+    public GameObject rightHand;
 
     // Start is called before the first frame update
     void Start()
     {
-        lr = GetComponent<LineRenderer>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(PlayerPrefs.GetString("lefthanded") == "true") { gunHolder.transform.SetParent(leftHand.transform); if (gunHolder.transform.position != leftHand.transform.position) { gunHolder.transform.position = leftHand.transform.position; gunHolder.transform.rotation = leftHand.transform.rotation; } }
+        else if(PlayerPrefs.GetString("lefthanded") == "false") { gunHolder.transform.SetParent(rightHand.transform); if (gunHolder.transform.position != rightHand.transform.position) { gunHolder.transform.position = rightHand.transform.position; gunHolder.transform.rotation = leftHand.transform.rotation; } }
 
-
-        if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpd; if (lineTimer < 0f) { lineTimer = 0f; } }
-        lr.startWidth = lineTimer;
-        lr.endWidth = lineTimer;
-
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButton(0))
         {
-            Shoot();
+            gunHolder.transform.GetChild(0).gameObject.SendMessage("AttemptShoot", SendMessageOptions.DontRequireReceiver);
+            
         }
-    }
-
-    void Shoot()
-    {
-        lr.positionCount = 1;
-        lr.SetPosition(0, firePoint.position);
-        linePoints.Clear();
-        linePoints.Add(firePoint.position);
-
-        Vector3 direction = firePoint.forward;
-
-        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, float.MaxValue))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            linePoints.Add(hit.point);
-
-            if (hit.transform.gameObject.tag == "boss core")
-            {
-                GameObject spawnedEffect = Instantiate(hitEffect);
-                spawnedEffect.transform.position = hit.point;
-                Destroy(spawnedEffect, 3f);
-            }
-            if(hit.transform.gameObject.tag == "boss ring")
-            {
-                linePoints.Add(new Vector3(Random.Range(-4, 4), Random.Range(-4, 4), Random.Range(-4, 4)) * 1000f);
-            }
-
-            RenderLine();
-        }
-        else
-        {
-            linePoints.Add(firePoint.position + direction * 9999);
-            RenderLine();
-        }
-    }
-
-    void RenderLine()
-    {
-        lineTimer = 0.3f;
-
-        lr.positionCount = linePoints.Count;
-
-        for (int i = 0; i < linePoints.Count; i++)
-        {
-            Debug.DrawLine(linePoints[i], linePoints[i] + Vector3.up * 3f, Color.yellow, 10f);
-            lr.SetPosition(i, linePoints[i]);
+            gunHolder.transform.GetChild(0).gameObject.SendMessage("AttemptReload", SendMessageOptions.DontRequireReceiver);
         }
     }
 }

@@ -1,9 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using OpenCover.Framework.Model;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GruntAi : MonoBehaviour

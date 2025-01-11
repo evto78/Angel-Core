@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -49,9 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        //lock cursor in game and hide it
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //if sens is <= 0 on launch, set it to 50
+        if (PlayerPrefs.GetFloat("sens") <= 0)
+        {
+            PlayerPrefs.SetFloat("sens", 50);
+        }
 
         //find the rigidbody component
         rb = GetComponent<Rigidbody>();
@@ -214,16 +215,19 @@ public class PlayerMovement : MonoBehaviour
     {
         sensitivity = PlayerPrefs.GetFloat("sens") / 10f;
 
-        //get mouse input
-        yaw += sensitivity * Input.GetAxis("Mouse X");
-        pitch -= sensitivity * Input.GetAxis("Mouse Y");
+        if(Cursor.lockState == CursorLockMode.Locked)
+        {
+            //get mouse input
+            yaw += sensitivity * Input.GetAxis("Mouse X");
+            pitch -= sensitivity * Input.GetAxis("Mouse Y");
 
-        //limit cam angle
-        pitch = Mathf.Clamp(pitch, -85.0f, 85.0f);
+            //limit cam angle
+            pitch = Mathf.Clamp(pitch, -85.0f, 85.0f);
 
-        //set cam angle
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, yaw, transform.eulerAngles.z);
-        cam.transform.eulerAngles = new Vector3(pitch, transform.eulerAngles.y, transform.eulerAngles.z);
+            //set cam angle
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, yaw, transform.eulerAngles.z);
+            cam.transform.eulerAngles = new Vector3(pitch, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
     }
 
     void GroundCheck()

@@ -39,7 +39,6 @@ public class BossMovement : MonoBehaviour
         if (hasTarget)
         {
             transform.position = transform.position + (Vector3.Normalize(targetLocation - transform.position) * speed * Time.deltaTime);
-            Debug.Log("moving" + targetLocation);
         }
     }
 
