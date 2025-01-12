@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7182093933148911464}
   - component: {fileID: 8350454418592725971}
   - component: {fileID: 2971062933771606215}
+  - component: {fileID: 2143684100550715384}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3091834742607807367}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -65.987366, y: 6.7092094, z: -37.345238}
+  m_LocalPosition: {x: -57.15, y: 6.7092094, z: -37.345238}
   m_LocalScale: {x: 0.40595657, y: 0.40595657, z: 0.40595657}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -128,7 +129,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 801180396a9c8d24783a293c9c006638, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -247,3 +248,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2143684100550715384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3091834742607807367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16680bda751237a46a0a8898939938a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
