@@ -5,12 +5,13 @@ using UnityEngine;
 public class GruntAi : MonoBehaviour
 
 {
-    float spd = 1;
+    float spd = 15;
     Rigidbody rb;
     Transform target;
     Vector3 moveDirection;
     HealthManager hp;
     public GameObject bulletPrefab;
+    float distance;
     
 
     void Awake()
@@ -29,17 +30,25 @@ public class GruntAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveTo();
-        if (Input.GetMouseButtonDown(1)) {hp.Death();}
+
+        distance = Vector3.Distance(target.position, transform.position);
+
+        if(distance > 5f) {MoveTo();}
+
+        LookTo();
 
     }
 
     void MoveTo()
     {
-        Vector3 dir = (target.position - transform.position);
-        Quaternion rotation = Quaternion.LookRotation(dir/2);
-        transform.rotation = rotation;
         transform.position += transform.forward * spd * Time.deltaTime;       
+    }
+
+    void LookTo()
+    {
+        Vector3 dir = (target.position - transform.position);
+        Quaternion rotation = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation,  156 * Time.deltaTime);
     }
     
 

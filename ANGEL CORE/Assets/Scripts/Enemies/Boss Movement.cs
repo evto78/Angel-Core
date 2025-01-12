@@ -36,7 +36,7 @@ public class BossMovement : MonoBehaviour
     void Update()
     {
         healthBar.fillAmount = healthman.curHealth * 1f / healthman.maxHealth * 1f;
-
+        
         GetTarget();
         MoveToTar();
     }
