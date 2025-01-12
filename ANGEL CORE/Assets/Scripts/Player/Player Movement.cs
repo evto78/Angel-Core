@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
+    GameObject spawnPoint;
+    public bool isDead;
+
     //movement
     public float maxSpeed;
     public float speed;
@@ -48,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        spawnPoint = GameObject.Find("SpawnPoint");
+        transform.position = spawnPoint.transform.position;
+        isDead = false;
+
         //if sens is <= 0 on launch, set it to 50
         if (PlayerPrefs.GetFloat("sens") <= 0)
         {

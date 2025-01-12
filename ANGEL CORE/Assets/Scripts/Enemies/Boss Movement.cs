@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossMovement : MonoBehaviour
 {
+    public Image healthBar;
+    HealthManager healthman;
+
     List<Vector3> points = new List<Vector3>();
     GameObject pointHolder;
     Vector3 targetLocation;
@@ -14,6 +18,8 @@ public class BossMovement : MonoBehaviour
 
     void Start()
     {
+        healthman = GetComponent<HealthManager>();
+
         hasTarget = false;
 
         pointHolder = GameObject.Find("RoamPoints");
@@ -29,6 +35,7 @@ public class BossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthBar.fillAmount = healthman.curHealth * 1f / healthman.maxHealth * 1f;
 
         GetTarget();
         MoveToTar();

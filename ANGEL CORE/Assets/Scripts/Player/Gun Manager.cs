@@ -9,10 +9,23 @@ public class GunManager : MonoBehaviour
     public GameObject leftHand;
     public GameObject rightHand;
 
+    int currentGun;
+    //number is the hierarchy order under the gunholder AKA:
+    //0 is Axe
+    //1 is Circular Saw
+    //2 is Chainsaw
+    //3 is Revolver
+    //4 is TommyGun
+    //5 is Gattlygun
+    //6 is Crossbow
+    //7 is Heavy Rifle
+    //8 is Prototype Heavy Crossbow
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //just set to revolver as default
+        currentGun = 3;
     }
 
     // Update is called once per frame
@@ -20,15 +33,37 @@ public class GunManager : MonoBehaviour
     {
         if(PlayerPrefs.GetString("lefthanded") == "true") { gunHolder.transform.SetParent(leftHand.transform); if (gunHolder.transform.position != leftHand.transform.position) { gunHolder.transform.position = leftHand.transform.position; gunHolder.transform.rotation = leftHand.transform.rotation; } }
         else if(PlayerPrefs.GetString("lefthanded") == "false") { gunHolder.transform.SetParent(rightHand.transform); if (gunHolder.transform.position != rightHand.transform.position) { gunHolder.transform.position = rightHand.transform.position; gunHolder.transform.rotation = leftHand.transform.rotation; } }
-
-        if (Input.GetMouseButton(0))
+        if (Cursor.lockState == CursorLockMode.Locked)
         {
-            gunHolder.transform.GetChild(0).gameObject.SendMessage("AttemptShoot", SendMessageOptions.DontRequireReceiver);
-            
+            if (Input.GetMouseButton(0))
+            {
+                gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptShoot", SendMessageOptions.DontRequireReceiver);
+            }
+            if (Input.GetKey(KeyCode.R))
+            {
+                gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptReload", SendMessageOptions.DontRequireReceiver);
+            }
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptReloadUp", SendMessageOptions.DontRequireReceiver);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.R))
+    }
+
+    public void SetGun(int gun)
+    {
+        Debug.Log(gun);
+        currentGun = gun;
+        for(int i = 0; i < gunHolder.transform.childCount; i++)
         {
-            gunHolder.transform.GetChild(0).gameObject.SendMessage("AttemptReload", SendMessageOptions.DontRequireReceiver);
+            if(i == currentGun)
+            {
+                gunHolder.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                gunHolder.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
@@ -12,12 +13,12 @@ public class HealthManager : MonoBehaviour
         curHealth = maxHealth;
     }
 
-    void DealDamage(int dmgAmt)
+    public void DealDamage(int dmgAmt)
     {
         curHealth -= dmgAmt;
-        if(curHealth < 0) {curHealth = 0;}
+        if(curHealth < 1) { Death(); }
     }
-    void Heal(int healAmt)
+    public void Heal(int healAmt)
     {
         curHealth += healAmt;
         if(curHealth > maxHealth) {curHealth = maxHealth;}
@@ -25,8 +26,9 @@ public class HealthManager : MonoBehaviour
 
     public void Death()
     {
-        if (!player){Destroy(gameObject);}
+        if (!player){Destroy(gameObject); return; }
         //player death state 
+        gameObject.SendMessage("PlayerDied", SendMessageOptions.DontRequireReceiver);
     }
 
 }

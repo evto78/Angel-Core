@@ -49,7 +49,14 @@ public class PlayerUI : MonoBehaviour
             else { Pause(); }
         }
     }
+    public void PlayerDied()
+    {
+        
 
+        //unlock cursor in game and show it
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     public void Pause()
     {
         //unlock cursor in game and show it
