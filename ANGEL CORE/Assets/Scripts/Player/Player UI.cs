@@ -14,6 +14,8 @@ public class PlayerUI : MonoBehaviour
     public Sprite heartSprite;
     public Sprite deadHeartSprite;
 
+    public Image radialCharge;
+
     public GameObject pauseMenu;
     float storedTimeScale;
 
@@ -51,7 +53,7 @@ public class PlayerUI : MonoBehaviour
     }
     public void PlayerDied()
     {
-        
+        //TO:DO player death state
 
         //unlock cursor in game and show it
         Cursor.lockState = CursorLockMode.None;

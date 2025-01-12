@@ -38,6 +38,8 @@ public class CrossbowScript : MonoBehaviour
     }
     void Update()
     {
+        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = charge / maxCharge;
+
         modifiedDmg = Mathf.RoundToInt(dmg * charge);
         chargeBlock.transform.localPosition = new Vector3(0, 0.02f, Mathf.Lerp(minChargeZPOS, maxChargeZPOS, charge/maxCharge));
         if(charge > maxCharge) { charge = maxCharge; }

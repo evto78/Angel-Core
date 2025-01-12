@@ -39,6 +39,10 @@ public class GunManager : MonoBehaviour
             {
                 gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptShoot", SendMessageOptions.DontRequireReceiver);
             }
+            if (Input.GetMouseButtonUp(0))
+            {
+                gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptShootUp", SendMessageOptions.DontRequireReceiver);
+            }
             if (Input.GetKey(KeyCode.R))
             {
                 gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptReload", SendMessageOptions.DontRequireReceiver);
@@ -52,7 +56,6 @@ public class GunManager : MonoBehaviour
 
     public void SetGun(int gun)
     {
-        Debug.Log(gun);
         currentGun = gun;
         for(int i = 0; i < gunHolder.transform.childCount; i++)
         {

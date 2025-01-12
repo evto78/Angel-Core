@@ -41,6 +41,8 @@ public class GattlyGunScript : MonoBehaviour
     }
     void Update()
     {
+        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = charge - 1f / maxCharge - 1f;
+
         if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpeed; if (lineTimer < 0f) { lineTimer = 0f; } }
         lr.startWidth = lineTimer;
         lr.endWidth = lineTimer;

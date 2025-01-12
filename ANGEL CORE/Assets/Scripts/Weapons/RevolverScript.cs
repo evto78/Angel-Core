@@ -32,6 +32,8 @@ public class RevolverScript : MonoBehaviour
     }
     void Update()
     {
+        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = 0;
+
         if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpeed; if (lineTimer < 0f) { lineTimer = 0f; } }
         lr.startWidth = lineTimer;
         lr.endWidth = lineTimer;
