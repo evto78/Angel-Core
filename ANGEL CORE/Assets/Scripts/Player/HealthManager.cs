@@ -13,6 +13,12 @@ public class HealthManager : MonoBehaviour
         curHealth = maxHealth;
     }
 
+    private void Update()
+    {
+        // for debugging, feel free to remove if needed
+        if (Input.GetKeyDown(KeyCode.T) && player) { DealDamage(1); }
+    }
+
     public void DealDamage(int dmgAmt)
     {
         curHealth -= dmgAmt;

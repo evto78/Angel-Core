@@ -17,6 +17,8 @@ public class PlayerUI : MonoBehaviour
     public Image radialCharge;
 
     public GameObject pauseMenu;
+    public GameObject deathScreen;
+    float deathscreenfade;
     float storedTimeScale;
 
     HealthManager healthman;
@@ -29,6 +31,8 @@ public class PlayerUI : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
+        deathScreen.SetActive(false);
         healthman = GetComponent<HealthManager>();
         rb = GetComponent<Rigidbody>();
 
@@ -45,19 +49,36 @@ public class PlayerUI : MonoBehaviour
         if(healthman.curHealth > 1) { heart2.GetComponent<Image>().sprite = heartSprite; } else { heart2.GetComponent<Image>().sprite = deadHeartSprite; }
         if(healthman.curHealth > 2) { heart3.GetComponent<Image>().sprite = heartSprite; } else { heart3.GetComponent<Image>().sprite = deadHeartSprite; }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && deathScreen.activeSelf == false)
         {
             if (pauseMenu.activeSelf) { UnPause(); }
             else { Pause(); }
         }
+        if(deathScreen.activeSelf == true)
+        {
+            Time.timeScale = deathscreenfade;
+            deathScreen.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, deathscreenfade);
+            deathscreenfade -= Time.deltaTime;
+            if (deathscreenfade < 0.2f) { deathscreenfade = 0.2f; }
+        }
     }
     public void PlayerDied()
     {
-        //TO:DO player death state
+        if(deathScreen.activeSelf == false)
+        {
+            //player death state
 
-        //unlock cursor in game and show it
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+            UnPause();
+            Time.timeScale = 1f;
+            deathScreen.SetActive(true);
+            deathScreen.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 1f);
+            deathscreenfade = 1f;
+
+
+            //unlock cursor in game and show it
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
     public void Pause()
     {
@@ -78,10 +99,14 @@ public class PlayerUI : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = storedTimeScale;
     }
-
     public void ExitToMenu()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu");
+    }
+    public void Respawn()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Boss Testing");
     }
 }
