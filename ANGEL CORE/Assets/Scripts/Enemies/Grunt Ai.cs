@@ -48,7 +48,16 @@ public class GruntAi : MonoBehaviour
     {
         Vector3 dir = (target.position - transform.position);
         Quaternion rotation = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation,  156 * Time.deltaTime);
+        if (distance > 20f) 
+        { 
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 900 * Time.deltaTime); 
+        }
+
+        else 
+        { 
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 250 * Time.deltaTime); 
+        }
+        
     }
     
 
