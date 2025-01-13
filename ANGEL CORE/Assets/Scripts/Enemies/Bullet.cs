@@ -9,6 +9,10 @@ public class Bullet : MonoBehaviour
     float startUpTimer = 2f;
     int spd = 20;
     Transform target;
+    float DeathTimer = 20f;
+
+
+
     void Start()
     {
         target = GameObject.Find("Player").transform;
@@ -22,6 +26,8 @@ public class Bullet : MonoBehaviour
         {
             followPlayer();
         }
+        DeathTimer -= Time.deltaTime;
+        if (DeathTimer <= 0) {Death();}
     }
 
     void followPlayer()
@@ -30,5 +36,13 @@ public class Bullet : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation,  85 * Time.deltaTime);
         transform.position += transform.forward * spd * Time.deltaTime;       
+    }
+    void Death()
+    {
+        Destroy(gameObject);
+    }
+    private void OnCollisionEnter(Collision other) 
+    {
+        Death();
     }
 }
