@@ -16,20 +16,28 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player").transform;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(startUp && startUpTimer >= 0) {transform.position += Vector3.forward * spd * Time.deltaTime; startUpTimer -= Time.deltaTime;}
+        //moves forward for 5 seconds
+        if(startUp && startUpTimer >= 0) 
+        {
+
+            transform.position += Vector3.up * spd * Time.deltaTime; startUpTimer -= Time.deltaTime;
+        }
         else
         {
             followPlayer();
         }
+        // dies after 20 seconds
         DeathTimer -= Time.deltaTime;
         if (DeathTimer <= 0) {Death();}
     }
 
+    //chases the player
     void followPlayer()
     {
         Vector3 dir = (target.position - transform.position);
@@ -37,12 +45,18 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation,  85 * Time.deltaTime);
         transform.position += transform.forward * spd * Time.deltaTime;       
     }
+    //kils itself
     void Death()
     {
         Destroy(gameObject);
     }
     private void OnCollisionEnter(Collision other) 
     {
-        Death();
+        bool tag = other.gameObject.CompareTag("boss ring");
+        if(tag == true)
+        {
+
+        }
+        else {Death();}
     }
 }
