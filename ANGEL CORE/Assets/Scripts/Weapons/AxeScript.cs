@@ -4,140 +4,93 @@ using UnityEngine;
 
 public class AxeScript : MonoBehaviour
 {
-    List<Vector3> linePoints = new List<Vector3>();
-    float lineTimer;
-    LineRenderer lr;
+    PlayerMovement movementScript;
+
     Animator animator;
-    public Transform firePoint;
+    LineRenderer lr;
+    GameObject blade;
+    GameObject pully;
+    GameObject handle;
+    Transform firepoint;
 
-    public GameObject hitEffect;
+    public GameObject quickSlashHitbox;
+    public GameObject heavySlashHitbox;
+    public GameObject heavyAttachHitbox;
 
-    //Gun Stats
-    public float atkSpeed;
-    public float relSpeed;
-    public int magSize;
-    public int dmg;
-
-    int curBul;
-    bool reloading;
-    float relTimer;
-    float atkSpeedTimer;
+    public KeyCode quickSlash;
+    public float quickEndLag;
+    float quickEndLagTimer;
+    bool quickSlashing;
+    public KeyCode heavySlash;
+    public float heavyLeadUp;
+    public float heavyEndLag;
+    float heavyEndLagTimer;
+    bool stuck;
+    bool heavySlashing;
+    public float maxDetachTime;
+    float detachTimer;
+    float ropeLegnth;
+    bool detached;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        movementScript = GetComponentInParent<PlayerMovement>();
+        heavySlashing = false;
+        quickSlashing = false;
+        stuck = false;
+        detached = false;
         lr = GetComponent<LineRenderer>();
-        curBul = magSize;
-        reloading = false;
+        animator = GetComponent<Animator>();
+        blade = transform.GetChild(0).gameObject;
+        pully = transform.GetChild(1).gameObject;
+        handle = transform.GetChild(2).gameObject;
+        firepoint = transform.GetChild(3);
     }
     void Update()
     {
-        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = 0;
-
-        if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpeed; if (lineTimer < 0f) { lineTimer = 0f; } }
-        lr.startWidth = lineTimer;
-        lr.endWidth = lineTimer;
-
-        //Manage UI
-        transform.GetComponentInParent<PlayerUI>().curBullets = curBul;
-        transform.GetComponentInParent<PlayerUI>().maxBullets = magSize;
-
-        //Manage Timers
-        relTimer -= Time.deltaTime;
-        if (relTimer < 0 && reloading == true) { reloading = false; curBul = magSize; animator.SetBool("Reloading", false); }
-        atkSpeedTimer -= Time.deltaTime;
-    }
-    public void AttemptShoot()
-    {
-        if (relTimer < 0 && atkSpeedTimer < 0 && curBul > 0)
+        if (Input.GetKeyDown(quickSlash))
         {
-            curBul--;
-            Shoot();
-        }
-        else if (relTimer < 0 && atkSpeedTimer < 0 && curBul == 0)
-        {
-            AttemptReload();
-        }
-    }
-    void Shoot()
-    {
-        atkSpeedTimer = 1 / atkSpeed;
-
-        animator.speed = 1 * atkSpeed;
-        animator.SetTrigger("Shoot");
-
-        lr.positionCount = 1;
-        lr.SetPosition(0, firePoint.position);
-        linePoints.Clear();
-        linePoints.Add(firePoint.position);
-
-        Vector3 direction = GetDir();
-
-        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, float.MaxValue))
-        {
-            linePoints.Add(hit.point);
-
-            if (hit.transform.gameObject.tag == "boss core")
+            if (!stuck && !heavySlashing && (heavyEndLagTimer <= 0 && quickEndLagTimer <= 0))
             {
-                GameObject spawnedEffect = Instantiate(hitEffect);
-                spawnedEffect.transform.position = hit.point;
-                Destroy(spawnedEffect, 3f);
-
-                hit.transform.gameObject.GetComponent<HealthManager>().DealDamage(dmg);
+                AttemptQuickSlash();
             }
-            if (hit.transform.gameObject.tag == "boss ring")
+            else if (stuck && !heavySlashing)
             {
-                linePoints.Add(new Vector3(Random.Range(-4, 4), Random.Range(-4, 4), Random.Range(-4, 4)) * 1000f);
+                AttemptDetach();
             }
-
-            RenderLine();
         }
-        else
+        if (Input.GetKeyDown(heavySlash))
         {
-            linePoints.Add(firePoint.position + direction * 9999);
-            RenderLine();
-        }
-    }
-
-    Vector3 GetDir()
-    {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            return hit.point - transform.position;
+            if (heavyEndLagTimer <= 0 && quickEndLagTimer <= 0)
+            {
+                AttemptHeavySlash();
+            }
         }
 
-        return Camera.main.transform.forward;
+        //manage timers
+        quickEndLagTimer -= Time.deltaTime;
+        if(quickEndLagTimer <= 0 && quickSlashing) { quickSlashing = false; }
+        heavyEndLagTimer -= Time.deltaTime;
+        if(heavyEndLagTimer <= 0 && heavySlashing) { heavySlashing = false; }
+        detachTimer -= Time.deltaTime;
+        if(detachTimer <= 0 && detached) { detached = false; }
     }
-
-    public void AttemptReload()
+    void AttemptQuickSlash()
     {
-        if (atkSpeedTimer <= 0f && relTimer <= 0f && curBul < magSize)
-        {
-            reloading = true;
-            Reload();
-        }
+        quickSlashing = true;
+        animator.SetTrigger("QuickSwing");
+        quickEndLagTimer = quickEndLag;
     }
-    void Reload()
+    void AttemptHeavySlash()
     {
-        relTimer = 1 / relSpeed;
-
-        animator.speed = 1 * relSpeed;
-        animator.SetBool("Reloading", true);
+        quickSlashing = false;
+        heavySlashing = true;
+        animator.SetTrigger("HeavySwing");
+        heavyEndLagTimer = heavyEndLag;
     }
-    void RenderLine()
+    void AttemptDetach()
     {
-        lineTimer = 0.3f;
 
-        lr.positionCount = linePoints.Count;
-
-        for (int i = 0; i < linePoints.Count; i++)
-        {
-            Debug.DrawLine(linePoints[i], linePoints[i] + Vector3.up * 3f, Color.yellow, 10f);
-            lr.SetPosition(i, linePoints[i]);
-        }
     }
 }
 
