@@ -17,7 +17,6 @@ public class BulletSpawner : MonoBehaviour
         {
             GameObject bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
             bulletTimer = 3;
-            Debug.Log("bullets!");
 
         }
     }

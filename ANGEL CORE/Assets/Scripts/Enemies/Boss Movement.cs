@@ -19,9 +19,13 @@ public class BossMovement : MonoBehaviour
     float timer = 5f;
     public float speed;
     Transform target;
+    private bool Bombing = false;
+    int phase = 0;
+
 
     void Start()
     {
+        phase = 0;
         healthman = GetComponent<HealthManager>();
 
         hasTarget = false;
@@ -43,16 +47,29 @@ public class BossMovement : MonoBehaviour
         target = GameObject.Find("Player").transform;
 
 
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         healthBar.fillAmount = healthman.curHealth * 1f / healthman.maxHealth * 1f;
-        
-        GetTarget();
-        MoveToTar();
-        LookAtPlayer();
+        if(healthman.curHealth <= healthman.maxHealth)
+        {
+            phase = 1;
+            Debug.Log("Changing Phase");
+        }
+
+        if (phase == 0)
+
+        {
+            GetTarget();
+            MoveToTar();
+        }
+
+        else{PurityBomb();}
+
     }
 
     void MoveToTar()
@@ -79,11 +96,19 @@ public class BossMovement : MonoBehaviour
 
 
     }
-    void LookAtPlayer()
+    void PurityBomb()
     {
-        Vector3 dir = (target.position - transform.position);
-        Quaternion rotation = Quaternion.LookRotation(dir);
-        transform.rotation = rotation;
+        targetLocation = new Vector3(0,transform.position.y,0);
+        if(Vector3.Distance(targetLocation, transform.position) > 1f)
+        {
+            MoveToTar();
+            Debug.Log("moving to bomb");
+        }
+        else
+        {
+
+            Bombing = true;
+        }
     }
     
 }

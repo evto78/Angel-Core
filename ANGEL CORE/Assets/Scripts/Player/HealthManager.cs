@@ -8,7 +8,7 @@ public class HealthManager : MonoBehaviour
     public bool player = false;
     public int maxHealth;
     public int curHealth;
-    void Start()
+    void Awake()
     {
         curHealth = maxHealth;
     }

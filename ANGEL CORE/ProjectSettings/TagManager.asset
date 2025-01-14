@@ -6,6 +6,7 @@ TagManager:
   tags:
   - boss ring
   - boss core
+  - Ground
   layers:
   - Default
   - TransparentFX
