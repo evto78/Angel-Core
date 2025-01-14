@@ -7,6 +7,9 @@ TagManager:
   - boss ring
   - boss core
   - Ground
+  - grunt core
+  - grunt ring
+  - enemy projectile
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - UI
   - Enemy
   - Hitbox
-  - 
+  - EnemyProjectile
   - 
   - 
   - 

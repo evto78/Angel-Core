@@ -4710,8 +4710,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8541609607544052995}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.33333334, y: 0}
-  m_AnchorMax: {x: 0.33333334, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -6.9999695, y: 0}
   m_SizeDelta: {x: 34.1928, y: -16.2767}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5181,7 +5181,7 @@ RectTransform:
   m_Father: {fileID: 1751640472410964603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.33333334, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6489,13 +6489,15 @@ GameObject:
   - component: {fileID: 7640878487469027118}
   - component: {fileID: 3882797192058991734}
   - component: {fileID: 26995942876025036}
+  - component: {fileID: 3795513609148177620}
+  - component: {fileID: 2876951374011022524}
   m_Layer: 7
   m_Name: HeavyAttachHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7365702037201400636
 Transform:
   m_ObjectHideFlags: 0
@@ -6526,7 +6528,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6045603830187911235}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6582,6 +6584,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3795513609148177620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045603830187911235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c565745e23b2dd54499d47b05c145713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsToCollideWith:
+  - boss ring
+  - boss core
+  - grunt core
+  - grunt ring
+  - enemy projectile
+  collidedObjects: []
+--- !u!54 &2876951374011022524
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045603830187911235}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &6046687390878326317
 GameObject:
   m_ObjectHideFlags: 0
@@ -6616,7 +6664,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 151.30273, y: 27.003876}
+  m_AnchoredPosition: {x: 151.30273, y: 27.003998}
   m_SizeDelta: {x: -323.5758, y: -54.0075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6209038130710741014
@@ -8606,13 +8654,15 @@ GameObject:
   - component: {fileID: 4070836720824415661}
   - component: {fileID: 1320823575755189083}
   - component: {fileID: 2058092185270644780}
+  - component: {fileID: 1133838744395713819}
+  - component: {fileID: 5003835958818013918}
   m_Layer: 7
   m_Name: QuickHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5225677232414457688
 Transform:
   m_ObjectHideFlags: 0
@@ -8643,7 +8693,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7167902055082494371}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8699,6 +8749,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1133838744395713819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167902055082494371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c565745e23b2dd54499d47b05c145713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsToCollideWith:
+  - boss ring
+  - boss core
+  - grunt core
+  - grunt ring
+  - enemy projectile
+  collidedObjects: []
+--- !u!54 &5003835958818013918
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167902055082494371}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &7186803741281870992
 GameObject:
   m_ObjectHideFlags: 0
@@ -9998,13 +10094,15 @@ GameObject:
   - component: {fileID: 3270941203167873889}
   - component: {fileID: 2558903886956149355}
   - component: {fileID: 5138502479097725591}
+  - component: {fileID: 3375318453320505912}
+  - component: {fileID: 7444503931340321956}
   m_Layer: 7
   m_Name: HeavyHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8134636762148016175
 Transform:
   m_ObjectHideFlags: 0
@@ -10035,7 +10133,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8711597879823195889}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10091,6 +10189,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3375318453320505912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711597879823195889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c565745e23b2dd54499d47b05c145713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsToCollideWith:
+  - boss ring
+  - boss core
+  - grunt core
+  - grunt ring
+  - enemy projectile
+  collidedObjects: []
+--- !u!54 &7444503931340321956
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711597879823195889}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &8723352408612793091
 GameObject:
   m_ObjectHideFlags: 0
@@ -10695,14 +10839,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bceed6d1972a571448f714309adac73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quickSlashHitbox: {fileID: 8324551218205311199, guid: 26158677dab99bc44ac3156b15200498, type: 3}
-  heavySlashHitbox: {fileID: 7230700812354429814, guid: 5f05927926e800d4f8dd4bd9dd9469cf, type: 3}
-  heavyAttachHitbox: {fileID: 7714096490401078637, guid: 9731c926e48049e4482063adf416a7f8, type: 3}
+  quickSlashHitbox: {fileID: 7167902055082494371}
+  heavySlashHitbox: {fileID: 8711597879823195889}
+  heavyAttachHitbox: {fileID: 6045603830187911235}
   quickSlash: 118
-  quickEndLag: 0.5
+  quickDmg: 50
+  quickKnockback: 100
+  quickSelfKnockback: 50
+  quickActiveTime: 0.25
+  quickEndLag: 1.5
   heavySlash: 102
-  heavyLeadUp: 0.5
-  heavyEndLag: 1
+  heavyDmg: 200
+  heavyActiveTime: 0.25
+  heavyLeadUp: 1
+  heavyEndLag: 2
   maxDetachTime: 10
 --- !u!1 &9027748739177251551
 GameObject:

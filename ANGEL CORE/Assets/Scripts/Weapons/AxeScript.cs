@@ -18,11 +18,20 @@ public class AxeScript : MonoBehaviour
     public GameObject heavyAttachHitbox;
 
     public KeyCode quickSlash;
+    public int quickDmg;
+    public float quickKnockback;
+    public float quickSelfKnockback;
+    public float quickActiveTime;
+    float quickActiveTimer;
     public float quickEndLag;
     float quickEndLagTimer;
     bool quickSlashing;
     public KeyCode heavySlash;
+    public int heavyDmg;
+    public float heavyActiveTime;
+    float heavyActiveTimer;
     public float heavyLeadUp;
+    float heavyLeadUpTimer;
     public float heavyEndLag;
     float heavyEndLagTimer;
     bool stuck;
@@ -67,11 +76,20 @@ public class AxeScript : MonoBehaviour
             }
         }
 
+        CheckForImpact();
+
         //manage timers
         quickEndLagTimer -= Time.deltaTime;
         if(quickEndLagTimer <= 0 && quickSlashing) { quickSlashing = false; }
+        quickActiveTimer -= Time.deltaTime;
+        if(quickActiveTimer <= 0) { quickSlashHitbox.SetActive(false); }
+
         heavyEndLagTimer -= Time.deltaTime;
         if(heavyEndLagTimer <= 0 && heavySlashing) { heavySlashing = false; }
+        heavyLeadUpTimer -= Time.deltaTime;
+        if(heavyLeadUpTimer <= 0 && heavySlashing) { heavyAttachHitbox.SetActive(true); heavySlashHitbox.SetActive(true); heavyActiveTimer = heavyActiveTime; }
+        heavyActiveTimer -= Time.deltaTime;
+        if(heavyActiveTimer <= 0) { heavyAttachHitbox.SetActive(false); heavySlashHitbox.SetActive(false); }
         detachTimer -= Time.deltaTime;
         if(detachTimer <= 0 && detached) { detached = false; }
     }
@@ -80,6 +98,8 @@ public class AxeScript : MonoBehaviour
         quickSlashing = true;
         animator.SetTrigger("QuickSwing");
         quickEndLagTimer = quickEndLag;
+        quickSlashHitbox.SetActive(true);
+        quickActiveTimer = quickActiveTime;
     }
     void AttemptHeavySlash()
     {
@@ -87,10 +107,45 @@ public class AxeScript : MonoBehaviour
         heavySlashing = true;
         animator.SetTrigger("HeavySwing");
         heavyEndLagTimer = heavyEndLag;
+        heavyLeadUpTimer = heavyLeadUp;
+
     }
     void AttemptDetach()
     {
 
+    }
+    void CheckForImpact()
+    {
+        if (quickSlashing && quickSlashHitbox.activeSelf)
+        {
+            List<GameObject> collisions = quickSlashHitbox.GetComponent<HitboxScript>().collidedObjects;
+            for(int i = 0; i < collisions.Count; i++)
+            {
+                if (collisions[i].tag == "grunt core")
+                {
+                    collisions[i].GetComponent<HealthManager>().DealDamage(quickDmg);
+                    collisions[i].GetComponent<Rigidbody>().AddForce(Vector3.Normalize(collisions[i].transform.position - transform.parent.parent.parent.position) * quickKnockback);
+
+                }
+                if (collisions[i].tag == "boss ring")
+                {
+                    transform.parent.parent.parent.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.parent.parent.parent.position - collisions[i].transform.position) * quickSelfKnockback);
+                }
+                if (collisions[i].tag == "boss core")
+                {
+                    collisions[i].GetComponent<HealthManager>().DealDamage(quickDmg);
+                }
+                if (collisions[i].tag == "enemy projectile")
+                {
+                    Destroy(collisions[i]);
+                    //TODO add reflecting 
+                }
+            }
+        }
+        if (heavySlashing && heavySlashHitbox.activeSelf)
+        {
+            //TODO heavyslash stuff
+        }
     }
 }
 
