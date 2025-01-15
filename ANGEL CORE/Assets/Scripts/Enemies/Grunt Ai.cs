@@ -12,6 +12,7 @@ public class GruntAi : MonoBehaviour
     HealthManager hp;
     public GameObject bulletPrefab;
     float distance;
+
     
 
     void Awake()
@@ -59,6 +60,6 @@ public class GruntAi : MonoBehaviour
         }
         
     }
-    
+
 
 }
