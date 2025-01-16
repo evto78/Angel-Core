@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     GameObject spawnPoint;
+    HealthManager healthman;
     public bool isDead;
 
     //movement
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         spawnPoint = GameObject.Find("SpawnPoint");
         transform.position = spawnPoint.transform.position;
         isDead = false;
+        healthman = GetComponent<HealthManager>();
 
         //if sens is <= 0 on launch, set it to 50
         if (PlayerPrefs.GetFloat("sens") <= 0)
@@ -75,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         CamControl();
         GroundCheck();
         GetInput();
+        
 
         //limit velocity
         Vector3 horVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);

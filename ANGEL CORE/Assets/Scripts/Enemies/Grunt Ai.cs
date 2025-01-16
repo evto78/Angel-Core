@@ -12,8 +12,8 @@ public class GruntAi : MonoBehaviour
     HealthManager hp;
     public GameObject bulletPrefab;
     float distance;
-
-    
+    GameObject hitbox;
+    float atkTimer = 5f;
 
     void Awake()
     {
@@ -24,7 +24,9 @@ public class GruntAi : MonoBehaviour
 
     void Start()
     {
-        
+
+        hitbox = GameObject.Find("Hitbox");
+        hitbox.SetActive(false);
         target = GameObject.Find("Player").transform;
     }
 
@@ -35,8 +37,9 @@ public class GruntAi : MonoBehaviour
         distance = Vector3.Distance(target.position, transform.position);
 
         if(distance > 5f) {MoveTo();}
-
+        if(distance <= 5f) {Attack();}
         LookTo();
+        atkTimer -= Time.deltaTime;
 
     }
 
@@ -58,6 +61,17 @@ public class GruntAi : MonoBehaviour
         { 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 250 * Time.deltaTime); 
         }
+        
+    }
+    void Attack()
+    {
+        if (atkTimer <= 0)
+        {
+            hitbox.SetActive(true);
+
+            atkTimer = 5f;
+        } 
+
         
     }
 
