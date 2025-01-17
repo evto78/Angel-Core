@@ -10,6 +10,7 @@ TagManager:
   - grunt core
   - grunt ring
   - enemy projectile
+  - Hitbox
   layers:
   - Default
   - TransparentFX

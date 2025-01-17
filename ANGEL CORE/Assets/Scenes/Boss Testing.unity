@@ -1297,7 +1297,7 @@ PrefabInstance:
       objectReference: {fileID: 1269853016}
     - target: {fileID: 5366558070798491885, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.003998
+      value: 27.004028
       objectReference: {fileID: 0}
     - target: {fileID: 6602857866310753672, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_Name
@@ -13116,7 +13116,7 @@ GameObject:
   - component: {fileID: 1881455727}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -267,6 +268,11 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
             jumps += 1;
             Debug.Log("+ 1 jump");
+        }
+        if(collision.gameObject.name == "Hitbox")
+        {
+            healthman.DealDamage(1);
+            Debug.Log("Hit");
         }
     }
     

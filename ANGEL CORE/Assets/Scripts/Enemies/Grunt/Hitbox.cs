@@ -5,10 +5,11 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
 
-    HealthManager Player;
+    GameObject Player;
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.Find("Player");
         Player.GetComponent<HealthManager>();
     }
 
@@ -21,7 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if(gameObject.CompareTag("Player"))
         {
-            Player.DealDamage(1);
+            
         }
     }
 }

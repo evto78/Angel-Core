@@ -58,7 +58,7 @@ public class BossMovement : MonoBehaviour
         if(healthman.curHealth <= healthman.maxHealth)
         {
             phase = 1;
-            Debug.Log("Changing Phase");
+
         }
 
         if (phase == 0)
