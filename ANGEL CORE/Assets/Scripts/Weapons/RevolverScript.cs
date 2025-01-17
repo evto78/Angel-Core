@@ -7,21 +7,30 @@ public class RevolverScript : MonoBehaviour
     List<Vector3> linePoints = new List<Vector3>();
     float lineTimer;
     LineRenderer lr;
+    public LineRenderer rr;
     Animator animator;
     public Transform firePoint;
+    public GameObject player;
 
     public GameObject hitEffect;
+    public GameObject thrownGun;
 
     //Gun Stats
     public float atkSpeed;
     public float relSpeed;
     public int magSize;
     public int dmg;
+    public float spread;
 
+    public float throwForce;
     int curBul;
     bool reloading;
     float relTimer;
     float atkSpeedTimer;
+    bool throwing;
+    bool thrown;
+    float thrownInvisTimer;
+    GameObject spawnedAxe;
 
     void Start()
     {
@@ -32,6 +41,33 @@ public class RevolverScript : MonoBehaviour
     }
     void Update()
     {
+        if(thrown && thrownInvisTimer <= 0)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
+            if(spawnedAxe == null && rr.enabled == true)
+            {
+                thrown = false;
+                throwing = false;
+                animator.SetBool("throwing", false);
+                //TODO, Currently just launches you forwards, should launch towards the axe and be relative to distance
+                player.GetComponent<Rigidbody>().AddForce(Vector3.up * 150f);
+                player.GetComponent<Rigidbody>().AddForce(player.transform.forward * 1500f);
+            }
+            else
+            {
+                if (spawnedAxe == null) { SpawnAxe(); }
+                else { rr.enabled = true; RenderRope(); }
+            }
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
+
+            rr.enabled = false;
+        }
+
         transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = 0;
 
         if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpeed; if (lineTimer < 0f) { lineTimer = 0f; } }
@@ -46,10 +82,11 @@ public class RevolverScript : MonoBehaviour
         relTimer -= Time.deltaTime;
         if(relTimer < 0 && reloading == true) { reloading = false; curBul = magSize; animator.SetBool("Reloading", false); }
         atkSpeedTimer -= Time.deltaTime;
+        thrownInvisTimer -= Time.deltaTime;
     }
     public void AttemptShoot()
     {
-        if(relTimer < 0 && atkSpeedTimer < 0 && curBul > 0)
+        if(!thrown && !throwing && relTimer < 0 && atkSpeedTimer < 0 && curBul > 0)
         {
             curBul--;
             Shoot();
@@ -73,11 +110,18 @@ public class RevolverScript : MonoBehaviour
 
         Vector3 direction = GetDir();
 
+        direction.Normalize();
+
+        if (curBul < magSize)
+        {
+            direction += new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
+        }
+
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, float.MaxValue))
         {
             linePoints.Add(hit.point);
 
-            if (hit.transform.gameObject.tag == "boss core")
+            if (hit.transform.gameObject.tag == "boss core" || hit.transform.gameObject.tag == "grunt core")
             {
                 GameObject spawnedEffect = Instantiate(hitEffect);
                 spawnedEffect.transform.position = hit.point;
@@ -99,6 +143,41 @@ public class RevolverScript : MonoBehaviour
         }
     }
 
+    public void AttemptAltShoot()
+    {
+        if (!thrown && !throwing)
+        {
+            throwing = true;
+            animator.SetBool("Throwing", true);
+        }
+        
+    }
+
+    public void AttemptAltShootUp()
+    {
+        if (!thrown && throwing)
+        {
+            throwing = false;
+            thrown = true;
+            thrownInvisTimer = 0.1f;
+            animator.SetBool("Throwing", false);
+            animator.SetTrigger("Throw");
+        }
+        
+    }
+
+    public void SpawnAxe()
+    {
+        spawnedAxe = Instantiate(thrownGun);
+        spawnedAxe.transform.position = transform.position;
+        spawnedAxe.transform.rotation = transform.rotation;
+        Vector3 throwDir = GetDir();
+        throwDir.Normalize();
+        spawnedAxe.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        spawnedAxe.GetComponent<Rigidbody>().AddForce(throwDir * throwForce);
+        spawnedAxe.GetComponent<Rigidbody>().AddTorque(spawnedAxe.transform.right * 90f);
+    }
+
     Vector3 GetDir()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -114,7 +193,7 @@ public class RevolverScript : MonoBehaviour
 
     public void AttemptReload()
     {
-        if (atkSpeedTimer <= 0f && relTimer <= 0f && curBul < magSize)
+        if (!thrown && !throwing && atkSpeedTimer <= 0f && relTimer <= 0f && curBul < magSize)
         {
             reloading = true;
             Reload();
@@ -138,5 +217,11 @@ public class RevolverScript : MonoBehaviour
             Debug.DrawLine(linePoints[i], linePoints[i] + Vector3.up * 3f, Color.yellow, 10f);
             lr.SetPosition(i, linePoints[i]);
         }
+    }
+
+    void RenderRope()
+    {
+        rr.SetPosition(0, firePoint.position);
+        rr.SetPosition(1, spawnedAxe.transform.position);
     }
 }

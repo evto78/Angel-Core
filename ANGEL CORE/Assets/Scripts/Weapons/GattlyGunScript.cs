@@ -18,6 +18,7 @@ public class GattlyGunScript : MonoBehaviour
     public float relSpeed;
     public int magSize;
     public int dmg;
+    public float spread;
 
     int curBul;
     bool reloading;
@@ -94,6 +95,13 @@ public class GattlyGunScript : MonoBehaviour
         linePoints.Add(firePoint.position);
 
         Vector3 direction = GetDir();
+
+        direction.Normalize();
+
+        if (curBul < magSize)
+        {
+            direction += new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
+        }
 
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, float.MaxValue))
         {

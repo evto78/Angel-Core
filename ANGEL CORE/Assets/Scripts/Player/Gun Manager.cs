@@ -25,7 +25,7 @@ public class GunManager : MonoBehaviour
     void Start()
     {
         //just set to revolver as default
-        currentGun = 3;
+        currentGun = 0;
     }
 
     // Update is called once per frame
@@ -42,6 +42,14 @@ public class GunManager : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptShootUp", SendMessageOptions.DontRequireReceiver);
+            }
+            if (Input.GetMouseButton(1))
+            {
+                gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptAltShoot", SendMessageOptions.DontRequireReceiver);
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                gunHolder.transform.GetChild(currentGun).gameObject.SendMessage("AttemptAltShootUp", SendMessageOptions.DontRequireReceiver);
             }
             if (Input.GetKey(KeyCode.R))
             {

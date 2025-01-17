@@ -1297,7 +1297,7 @@ PrefabInstance:
       objectReference: {fileID: 1269853016}
     - target: {fileID: 5366558070798491885, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.004028
+      value: 27.003998
       objectReference: {fileID: 0}
     - target: {fileID: 6602857866310753672, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_Name
@@ -7810,15 +7810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a7c2f51853b4a4487d6270bb8ab458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 15
-  rb: {fileID: 0}
-  target: {fileID: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  hp: {fileID: 0}
-  bulletPrefab: {fileID: 3091834742607807367, guid: 8f5f485d3ba904e4bb2ec88de02dd6df, type: 3}
-  distance: 0
-  Attacking: 0
-  hitbox: {fileID: 0}
 --- !u!114 &1415441292
 MonoBehaviour:
   m_ObjectHideFlags: 0

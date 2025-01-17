@@ -9,7 +9,7 @@ public class BoltScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "boss core")
+        if (collision.gameObject.transform.gameObject.tag == "boss core" || collision.gameObject.transform.gameObject.tag == "grunt core")
         {
             collision.gameObject.GetComponent<HealthManager>().DealDamage(dmg);
             GameObject spawnedEffect = Instantiate(hitEffect);
