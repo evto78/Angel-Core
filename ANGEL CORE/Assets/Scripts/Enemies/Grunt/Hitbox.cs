@@ -5,12 +5,11 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
 
-    GameObject Player;
+
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("Player");
-        Player.GetComponent<HealthManager>();
+        
     }
 
     // Update is called once per frame
@@ -18,11 +17,12 @@ public class NewBehaviourScript : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision) 
+    private void OnTriggerEnter(Collider collision) 
     {
-        if(gameObject.CompareTag("Player"))
+        if(collision.gameObject.name == "Player")
         {
-            
+            Debug.Log("hit");
+            collision.gameObject.GetComponent<HealthManager>().DealDamage(1);
         }
     }
 }

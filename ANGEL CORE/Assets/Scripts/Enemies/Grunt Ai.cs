@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore;
 
 public class GruntAi : MonoBehaviour
 
@@ -13,7 +14,8 @@ public class GruntAi : MonoBehaviour
     public GameObject bulletPrefab;
     float distance;
     GameObject hitbox;
-    float atkTimer = 5f;
+    float atkTimer = 1f;
+    bool attacking = false;
 
     void Awake()
     {
@@ -33,13 +35,11 @@ public class GruntAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         distance = Vector3.Distance(target.position, transform.position);
-
-        if(distance > 5f) {MoveTo();}
-        if(distance <= 5f) {Attack();}
+        hitbox.SetActive(attacking);
+        if(distance > 3f) {MoveTo();}
+        Attack();
         LookTo();
-        atkTimer -= Time.deltaTime;
 
     }
 
@@ -65,14 +65,8 @@ public class GruntAi : MonoBehaviour
     }
     void Attack()
     {
-        if (atkTimer <= 0)
-        {
-            hitbox.SetActive(true);
-
-            atkTimer = 5f;
-        } 
-
-        
+        if(distance <= 4f) {attacking = true;}
+        else {attacking = false;}
     }
 
 
