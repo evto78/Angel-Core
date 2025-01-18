@@ -23,6 +23,7 @@ public class RevolverScript : MonoBehaviour
     public float spread;
 
     public float throwForce;
+    public float maxDistance;
     int curBul;
     bool reloading;
     float relTimer;
@@ -31,6 +32,7 @@ public class RevolverScript : MonoBehaviour
     bool thrown;
     float thrownInvisTimer;
     GameObject spawnedAxe;
+    Vector3 spawnedAxeLastPos;
 
     void Start()
     {
@@ -43,6 +45,16 @@ public class RevolverScript : MonoBehaviour
     {
         if(thrown && thrownInvisTimer <= 0)
         {
+            if (spawnedAxe != null) 
+            { 
+                spawnedAxeLastPos = spawnedAxe.transform.position; 
+                if(Vector3.Distance(player.transform.position, spawnedAxeLastPos) > maxDistance)
+                {
+                    spawnedAxeLastPos = player.transform.position;
+                    Destroy(spawnedAxe);
+                }
+            }
+
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
             if(spawnedAxe == null && rr.enabled == true)
@@ -50,9 +62,9 @@ public class RevolverScript : MonoBehaviour
                 thrown = false;
                 throwing = false;
                 animator.SetBool("throwing", false);
-                //TODO, Currently just launches you forwards, should launch towards the axe and be relative to distance
-                player.GetComponent<Rigidbody>().AddForce(Vector3.up * 150f);
-                player.GetComponent<Rigidbody>().AddForce(player.transform.forward * 1500f);
+
+                player.GetComponent<Rigidbody>().AddForce(Vector3.up * 15f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
+                player.GetComponent<Rigidbody>().AddForce(Vector3.Normalize((spawnedAxeLastPos - player.transform.position)) * 50f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
             }
             else
             {

@@ -1497,7 +1497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2269719626655009938}
-  - component: {fileID: 1455992789866653925}
+  - component: {fileID: 3122604350918996831}
   - component: {fileID: 2940976368353936183}
   - component: {fileID: 1095647004301654013}
   - component: {fileID: 2167703431635166005}
@@ -1526,7 +1526,7 @@ Transform:
   - {fileID: 3099658464652576267}
   m_Father: {fileID: 3318998450222070800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1455992789866653925
+--- !u!114 &3122604350918996831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1535,20 +1535,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455921985731253800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be19862a47495544b74f03b53f24b9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b15c32bacc2ca4499961d9b43153f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rr: {fileID: 0}
   firePoint: {fileID: 8257990973531523113}
-  player: {fileID: 0}
   hitEffect: {fileID: 1940651747947740006, guid: e059f718739b4074797ac1bdcbc48408, type: 3}
-  thrownGun: {fileID: 0}
   atkSpeed: 0.8
   relSpeed: 0.2
   magSize: 20
   dmg: 32
   spread: 0
-  throwForce: 0
 --- !u!33 &2940976368353936183
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3055,7 +3051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3199001818555498569}
   spinnyTubes: {fileID: 5089191129540677871}
-  hitEffect: {fileID: 1940651747947740006, guid: e059f718739b4074797ac1bdcbc48408, type: 3}
+  hitEffect: {fileID: 1940651747947740006, guid: d9c79398003371843ab5ed712b63f55b, type: 3}
   atkSpeed: 5
   relSpeed: 0.2
   magSize: 80
@@ -4873,7 +4869,7 @@ MonoBehaviour:
   rr: {fileID: 4852243488624729321}
   firePoint: {fileID: 4275873758168919976}
   player: {fileID: 6602857866310753672}
-  hitEffect: {fileID: 1940651747947740006, guid: e059f718739b4074797ac1bdcbc48408, type: 3}
+  hitEffect: {fileID: 1940651747947740006, guid: 250d70bfbb41e2347ba80ebf5c6bbfbb, type: 3}
   thrownGun: {fileID: 3716058833145322276, guid: 021c33f2beead7f43824bee1b1d7b307, type: 3}
   atkSpeed: 1
   relSpeed: 0.5
@@ -4881,6 +4877,7 @@ MonoBehaviour:
   dmg: 32
   spread: 0
   throwForce: 2500
+  maxDistance: 120
 --- !u!33 &211538050641782189
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9270,7 +9267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8233779001095205305}
-  - component: {fileID: 2173844352457125276}
+  - component: {fileID: 1384654231862499435}
   - component: {fileID: 5038289888933756444}
   - component: {fileID: 7065988094826531542}
   - component: {fileID: 4238139106249085688}
@@ -9299,7 +9296,7 @@ Transform:
   - {fileID: 2909487259645058070}
   m_Father: {fileID: 3318998450222070800}
   m_LocalEulerAnglesHint: {x: 0, y: -6.88, z: 0}
---- !u!114 &2173844352457125276
+--- !u!114 &1384654231862499435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9308,20 +9305,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8723352408612793091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be19862a47495544b74f03b53f24b9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 09e1cb81f98d7114e8a8b7b313d42227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rr: {fileID: 0}
   firePoint: {fileID: 6302815793674035122}
-  player: {fileID: 0}
   hitEffect: {fileID: 1940651747947740006, guid: e059f718739b4074797ac1bdcbc48408, type: 3}
-  thrownGun: {fileID: 0}
   atkSpeed: 5
   relSpeed: 0.3
   magSize: 25
   dmg: 8
-  spread: 0
-  throwForce: 0
+  spread: 0.03
+  explosionDmg: 500
+  explosionForce: 350
+  throwForce: 500
+  thrownMine: {fileID: 5818977869734217780, guid: 44b7b809af0773e43a14d4ce952d9d9a, type: 3}
 --- !u!33 &5038289888933756444
 MeshFilter:
   m_ObjectHideFlags: 0

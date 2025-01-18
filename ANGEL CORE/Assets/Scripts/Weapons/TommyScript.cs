@@ -23,6 +23,11 @@ public class TommyScript : MonoBehaviour
     bool reloading;
     float relTimer;
     float atkSpeedTimer;
+    public int explosionDmg;
+    public float explosionForce;
+    public float throwForce;
+    public GameObject thrownMine;
+    GameObject spawnedMine;
 
     void Start()
     {
@@ -130,10 +135,23 @@ public class TommyScript : MonoBehaviour
     }
     void Reload()
     {
+        if(curBul > 0)
+        {
+            ThrowMine(curBul / magSize);
+        }
+
         relTimer = 1 / relSpeed;
 
         animator.speed = 1 * relSpeed;
         animator.SetBool("Reloading", true);
+    }
+    void ThrowMine(float bulLeft)
+    {
+        spawnedMine = Instantiate(thrownMine);
+        spawnedMine.transform.position = firePoint.position;
+        spawnedMine.GetComponent<Rigidbody>().AddForce(transform.forward * throwForce);
+        spawnedMine.GetComponent<ThrownMineScript>().dmg = Mathf.RoundToInt(bulLeft) * explosionDmg;
+        spawnedMine.GetComponent<ThrownMineScript>().force = bulLeft * explosionForce;
     }
     void RenderLine()
     {
