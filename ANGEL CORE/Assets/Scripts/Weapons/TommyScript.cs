@@ -137,7 +137,7 @@ public class TommyScript : MonoBehaviour
     {
         if(curBul > 0)
         {
-            ThrowMine(curBul / magSize);
+            ThrowMine((curBul / 2f) / (magSize / 2f));
         }
 
         relTimer = 1 / relSpeed;

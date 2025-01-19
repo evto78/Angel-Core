@@ -42,7 +42,8 @@ public class GattlyGunScript : MonoBehaviour
     }
     void Update()
     {
-        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = charge - 1f / maxCharge - 1f;
+        Debug.Log("Charge: " + (charge-1f) + " | Max Charge: " + (maxCharge-1f) + " | = " + (charge - 1f) / (maxCharge - 1f));
+        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = (charge - 1f) / (maxCharge - 1f);
 
         if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpeed; if (lineTimer < 0f) { lineTimer = 0f; } }
         lr.startWidth = lineTimer;
@@ -61,7 +62,7 @@ public class GattlyGunScript : MonoBehaviour
         if(charge < 1) { charge = 1; }
         if(charge > maxCharge) { charge = maxCharge; }
         modifiedAtkSpd = atkSpeed * (charge * chargeEffectiveness);
-        spinnyTubes.transform.Rotate(Vector3.forward * charge * 15f * Time.deltaTime);
+        spinnyTubes.transform.Rotate(Vector3.forward * charge * 200f * Time.deltaTime);
     }
     public void AttemptShoot()
     {
