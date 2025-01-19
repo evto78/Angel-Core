@@ -9316,8 +9316,8 @@ MonoBehaviour:
   dmg: 8
   spread: 0.03
   explosionDmg: 500
-  explosionForce: 350
-  throwForce: 500
+  explosionForce: 50
+  throwForce: 750
   thrownMine: {fileID: 5818977869734217780, guid: 44b7b809af0773e43a14d4ce952d9d9a, type: 3}
 --- !u!33 &5038289888933756444
 MeshFilter:

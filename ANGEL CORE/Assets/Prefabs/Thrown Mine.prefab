@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7652193375417248301}
   - component: {fileID: 7551971691720424666}
   - component: {fileID: 3238039731684115080}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1721996455782897367}
   - component: {fileID: 811545018454396647}
   - component: {fileID: 4143105759885385770}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 5473010222175012361}
   - component: {fileID: 9211188163821673265}
   - component: {fileID: 102765220191295166}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Thrown Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

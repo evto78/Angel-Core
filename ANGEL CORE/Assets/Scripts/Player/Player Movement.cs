@@ -71,8 +71,14 @@ public class PlayerMovement : MonoBehaviour
         jumps = 0;
     }
 
+    void KillFloor()
+    {
+        if(transform.position.y < -100f) { gameObject.GetComponent<HealthManager>().DealDamage(999); }
+    }
     void Update()
     {
+        KillFloor();
+
         CamControl();
         GroundCheck();
         GetInput();
