@@ -66,6 +66,7 @@ public class BossMovement : MonoBehaviour
         {
             GetTarget();
             MoveToTar();
+
         }
 
         else{PurityBomb();}
@@ -78,6 +79,7 @@ public class BossMovement : MonoBehaviour
         {
             transform.position = transform.position + (Vector3.Normalize(targetLocation - transform.position) * speed * Time.deltaTime);
         }
+        
     }
 
     void GetTarget()

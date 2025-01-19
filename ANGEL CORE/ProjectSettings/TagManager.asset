@@ -11,6 +11,7 @@ TagManager:
   - grunt ring
   - enemy projectile
   - Hitbox
+  - watcher core
   layers:
   - Default
   - TransparentFX
