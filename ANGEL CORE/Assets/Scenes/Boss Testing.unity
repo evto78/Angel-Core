@@ -1480,6 +1480,10 @@ PrefabInstance:
       propertyPath: jumpSparkParticles
       value: 
       objectReference: {fileID: 1269853016}
+    - target: {fileID: 4106788453725009164, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: MaxDistance
+      value: 1.01
+      objectReference: {fileID: 0}
     - target: {fileID: 5366558070798491885, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 27.003998

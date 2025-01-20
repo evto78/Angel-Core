@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SettingsScript : MonoBehaviour
 {
     public GameObject sensSlider;
+    public GameObject musicSlider;
     public bool leftHanded;
 
     private void Start()
@@ -21,11 +22,17 @@ public class SettingsScript : MonoBehaviour
             PlayerPrefs.SetFloat("sens", 50);
         }
         sensSlider.GetComponent<SliderScript>().slider.value = PlayerPrefs.GetFloat("sens");
+        if (PlayerPrefs.GetFloat("Music Volume") <= 0)
+        {
+            PlayerPrefs.SetFloat("Music Volume", 1f);
+        }
+        musicSlider.GetComponent<SliderScript>().slider.value = PlayerPrefs.GetFloat("Music Volume");
     }
 
     void Update()
     {
         PlayerPrefs.SetFloat("sens", sensSlider.GetComponent<SliderScript>().slider.value);
+        PlayerPrefs.SetFloat("Music Volume", musicSlider.GetComponent<SliderScript>().slider.value);
         if (leftHanded) { PlayerPrefs.SetString("lefthanded", "true"); }
         else { PlayerPrefs.SetString("lefthanded", "false"); }
     }
