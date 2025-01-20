@@ -63,8 +63,8 @@ public class RevolverScript : MonoBehaviour
                 throwing = false;
                 animator.SetBool("throwing", false);
 
-                player.GetComponent<Rigidbody>().AddForce(Vector3.up * 15f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
-                player.GetComponent<Rigidbody>().AddForce(Vector3.Normalize((spawnedAxeLastPos - player.transform.position)) * 50f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
+                player.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
+                player.GetComponent<Rigidbody>().AddForce(Vector3.Normalize((spawnedAxeLastPos - player.transform.position)) * 15f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
             }
             else
             {
@@ -181,8 +181,8 @@ public class RevolverScript : MonoBehaviour
     public void SpawnAxe()
     {
         spawnedAxe = Instantiate(thrownGun);
-        spawnedAxe.transform.position = transform.position;
-        spawnedAxe.transform.rotation = transform.rotation;
+        spawnedAxe.transform.position = Camera.main.transform.position;
+        spawnedAxe.transform.rotation = Camera.main.transform.rotation;
         Vector3 throwDir = GetDir();
         throwDir.Normalize();
         spawnedAxe.GetComponent<Rigidbody>().velocity = Vector3.zero;

@@ -19,6 +19,7 @@ public class GattlyGunScript : MonoBehaviour
     public int magSize;
     public int dmg;
     public float spread;
+    float modifiedSpread;
 
     int curBul;
     bool reloading;
@@ -42,7 +43,7 @@ public class GattlyGunScript : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log("Charge: " + (charge-1f) + " | Max Charge: " + (maxCharge-1f) + " | = " + (charge - 1f) / (maxCharge - 1f));
+        
         transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = (charge - 1f) / (maxCharge - 1f);
 
         if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpeed; if (lineTimer < 0f) { lineTimer = 0f; } }
@@ -59,15 +60,17 @@ public class GattlyGunScript : MonoBehaviour
         atkSpeedTimer -= Time.deltaTime;
 
         charge -= Time.deltaTime;
+        if (reloading) { charge -= Time.deltaTime; }
         if(charge < 1) { charge = 1; }
         if(charge > maxCharge) { charge = maxCharge; }
+        modifiedSpread = spread * (charge * chargeEffectiveness);
         modifiedAtkSpd = atkSpeed * (charge * chargeEffectiveness);
         spinnyTubes.transform.Rotate(Vector3.forward * charge * 200f * Time.deltaTime);
     }
     public void AttemptShoot()
     {
         //charge up gattlygun
-        if(charge < maxCharge)
+        if (charge < maxCharge && !reloading)
         {
             charge += Time.deltaTime * 2;
             modifiedAtkSpd = atkSpeed * (charge * chargeEffectiveness);
@@ -101,14 +104,14 @@ public class GattlyGunScript : MonoBehaviour
 
         if (curBul < magSize)
         {
-            direction += new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
+            direction += new Vector3(Random.Range(-modifiedSpread, modifiedSpread), Random.Range(-modifiedSpread, modifiedSpread), Random.Range(-modifiedSpread, modifiedSpread));
         }
 
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, float.MaxValue))
         {
             linePoints.Add(hit.point);
 
-            if (hit.transform.gameObject.tag == "boss core")
+            if (hit.transform.gameObject.tag == "boss core" || hit.transform.gameObject.tag == "grunt core")
             {
                 GameObject spawnedEffect = Instantiate(hitEffect);
                 spawnedEffect.transform.position = hit.point;
@@ -129,7 +132,16 @@ public class GattlyGunScript : MonoBehaviour
             RenderLine();
         }
     }
-
+    public void AttemptAltShoot()
+    {
+        charge += Time.deltaTime * 4f;
+        animator.SetBool("Revving", true);
+        animator.speed = (charge + 1f) / (maxCharge);
+    }
+    public void AttemptAltShootUp()
+    {
+        animator.SetBool("Revving", false);
+    }
     Vector3 GetDir()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));

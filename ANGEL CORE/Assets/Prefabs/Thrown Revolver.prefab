@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7436169882863482115}
   m_Layer: 9
   m_Name: Thrown Revolver
-  m_TagString: Untagged
+  m_TagString: player projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!96 &7436169882863482115
 TrailRenderer:
   serializedVersion: 3

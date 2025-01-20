@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 79064804}
   - component: {fileID: 79064803}
   - component: {fileID: 79064807}
+  - component: {fileID: 79064808}
   m_Layer: 6
   m_Name: Watcher
   m_TagString: grunt core
@@ -323,6 +324,33 @@ MonoBehaviour:
   player: 0
   maxHealth: 128
   curHealth: 0
+--- !u!54 &79064808
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79064802}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &129568210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,7 +1482,7 @@ PrefabInstance:
       objectReference: {fileID: 1269853016}
     - target: {fileID: 5366558070798491885, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.004028
+      value: 27.003998
       objectReference: {fileID: 0}
     - target: {fileID: 6602857866310753672, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_Name
@@ -8098,7 +8126,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1415441290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14049,6 +14077,7 @@ GameObject:
   - component: {fileID: 1952340733}
   - component: {fileID: 1952340734}
   - component: {fileID: 1952340735}
+  - component: {fileID: 1952340736}
   m_Layer: 6
   m_Name: Boss
   m_TagString: boss core
@@ -14191,6 +14220,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278999744848f0f459a5595b76fbd8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1952340736
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952340728}
+  serializedVersion: 4
+  m_Mass: 200.54
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1952902093
 GameObject:
   m_ObjectHideFlags: 0

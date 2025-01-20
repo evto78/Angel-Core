@@ -26,6 +26,7 @@ public class TommyScript : MonoBehaviour
     public int explosionDmg;
     public float explosionForce;
     public float throwForce;
+    bool bulletChambered;
     public GameObject thrownMine;
     GameObject spawnedMine;
 
@@ -50,7 +51,7 @@ public class TommyScript : MonoBehaviour
 
         //Manage Timers
         relTimer -= Time.deltaTime;
-        if (relTimer < 0 && reloading == true) { reloading = false; curBul = magSize; animator.SetBool("Reloading", false); }
+        if (relTimer < 0 && reloading == true) { bulletChambered = false; reloading = false; curBul = magSize; animator.SetBool("Reloading", false); }
         atkSpeedTimer -= Time.deltaTime;
     }
     public void AttemptShoot()
@@ -58,18 +59,26 @@ public class TommyScript : MonoBehaviour
         if (relTimer < 0 && atkSpeedTimer < 0 && curBul > 0)
         {
             curBul--;
-            Shoot();
+            Shoot(false);
+        }
+        else if(relTimer > 0 && atkSpeedTimer < 0 && bulletChambered)
+        {
+            Shoot(true);
+            bulletChambered = false;
         }
         else if (relTimer < 0 && atkSpeedTimer < 0 && curBul == 0)
         {
             AttemptReload();
         }
     }
-    void Shoot()
+    void Shoot(bool wasChambered)
     {
-        atkSpeedTimer = 1 / atkSpeed;
+        if (!wasChambered)
+        {
+            atkSpeedTimer = 1 / atkSpeed;
 
-        animator.speed = 1 * atkSpeed;
+            animator.speed = 1 * atkSpeed;
+        }
         animator.SetTrigger("Shoot");
 
         lr.positionCount = 1;
@@ -81,7 +90,7 @@ public class TommyScript : MonoBehaviour
 
         direction.Normalize();
 
-        if(curBul < magSize)
+        if(curBul < magSize && !wasChambered)
         {
             direction += new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
         }
@@ -101,6 +110,10 @@ public class TommyScript : MonoBehaviour
             if (hit.transform.gameObject.tag == "boss ring")
             {
                 linePoints.Add(new Vector3(Random.Range(-4, 4), Random.Range(-4, 4), Random.Range(-4, 4)) * 1000f);
+            }
+            if (hit.transform.gameObject.tag == "player projectile")
+            {
+                hit.transform.gameObject.GetComponent<ThrownMineScript>().Explode();
             }
 
             RenderLine();
@@ -138,6 +151,7 @@ public class TommyScript : MonoBehaviour
         if(curBul > 0)
         {
             ThrowMine((curBul / 2f) / (magSize / 2f));
+            bulletChambered = true;
         }
 
         relTimer = 1 / relSpeed;
@@ -148,8 +162,8 @@ public class TommyScript : MonoBehaviour
     void ThrowMine(float bulLeft)
     {
         spawnedMine = Instantiate(thrownMine);
-        spawnedMine.transform.position = firePoint.position;
-        spawnedMine.GetComponent<Rigidbody>().AddForce(transform.forward * throwForce);
+        spawnedMine.transform.position = Camera.main.transform.position;
+        spawnedMine.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward * throwForce) + (Vector3.up * (throwForce/6f)));
         spawnedMine.GetComponent<ThrownMineScript>().dmg = Mathf.RoundToInt(bulLeft) * explosionDmg;
         spawnedMine.GetComponent<ThrownMineScript>().force = bulLeft * explosionForce;
     }

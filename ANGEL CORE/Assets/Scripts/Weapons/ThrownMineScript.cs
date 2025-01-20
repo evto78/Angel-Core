@@ -9,6 +9,10 @@ public class ThrownMineScript : MonoBehaviour
     public float force;
     private void OnCollisionEnter(Collision collision)
     {
+        Explode();
+    }
+    public void Explode()
+    {
         GameObject spawnedExplosion = Instantiate(explosion);
         spawnedExplosion.transform.position = transform.position;
         spawnedExplosion.GetComponent<ExplosionScript>().explosionDmg = dmg;

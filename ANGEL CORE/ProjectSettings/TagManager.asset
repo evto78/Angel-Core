@@ -12,6 +12,7 @@ TagManager:
   - enemy projectile
   - Hitbox
   - watcher core
+  - player projectile
   layers:
   - Default
   - TransparentFX
