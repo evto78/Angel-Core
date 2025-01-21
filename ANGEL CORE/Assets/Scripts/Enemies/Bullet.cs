@@ -33,8 +33,7 @@ public class Bullet : MonoBehaviour
             followPlayer();
         }
         // dies after 20 seconds
-        DeathTimer -= Time.deltaTime;
-        if (DeathTimer <= 0) {Death();}
+        Destroy(gameObject, DeathTimer);
     }
 
     //chases the player
