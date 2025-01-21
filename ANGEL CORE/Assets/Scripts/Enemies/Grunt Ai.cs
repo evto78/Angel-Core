@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore;
 
@@ -15,6 +16,7 @@ public class GruntAi : MonoBehaviour
     float distance;
     GameObject hitbox;
     float atkTimer = 1f;
+    float atkCooldown = 3f;
     bool attacking = false;
 
     void Awake()
@@ -65,8 +67,11 @@ public class GruntAi : MonoBehaviour
     }
     void Attack()
     {
-        if(distance <= 4f) {attacking = true;}
-        else {attacking = false;}
+        atkCooldown -= Time.deltaTime;
+
+        if(atkCooldown <= 0 && distance <= 4f) {attacking = true;}
+        if(attacking) {atkTimer -= Time.deltaTime;}
+        if(atkTimer <= 0) {attacking = false; atkCooldown = 1f; atkTimer = 0.5f;}
     }
 
 
