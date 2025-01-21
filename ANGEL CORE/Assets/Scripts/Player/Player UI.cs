@@ -7,12 +7,8 @@ using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
-    public GameObject heart1;
-    public GameObject heart2;
-    public GameObject heart3;
-
-    public Sprite heartSprite;
-    public Sprite deadHeartSprite;
+    public Image healthBar;
+    public Image ammoBar;
 
     public Image radialCharge;
 
@@ -29,6 +25,9 @@ public class PlayerUI : MonoBehaviour
     public int maxBullets; // modified from the gunscripts
     Rigidbody rb;
 
+    float hurtEffectTimer;
+    public Image hurtEffect;
+
     void Start()
     {
         Time.timeScale = 1f;
@@ -42,12 +41,12 @@ public class PlayerUI : MonoBehaviour
     }
     void Update()
     {
+        // dividing by 2 to turn the int into a float
+        healthBar.fillAmount = (healthman.curHealth / 2f) / (healthman.maxHealth / 2f);
+        ammoBar.fillAmount = (curBullets / 2f) / (maxBullets / 2f);
+
         velocityText.text = "Vel: " + Mathf.RoundToInt(rb.velocity.magnitude).ToString();
         ammoText.text = curBullets.ToString() + " / " + maxBullets.ToString();
-
-        if(healthman.curHealth > 0) { heart1.GetComponent<Image>().sprite = heartSprite; } else { heart1.GetComponent<Image>().sprite = deadHeartSprite; }
-        if(healthman.curHealth > 1) { heart2.GetComponent<Image>().sprite = heartSprite; } else { heart2.GetComponent<Image>().sprite = deadHeartSprite; }
-        if(healthman.curHealth > 2) { heart3.GetComponent<Image>().sprite = heartSprite; } else { heart3.GetComponent<Image>().sprite = deadHeartSprite; }
 
         if (Input.GetKeyDown(KeyCode.Escape) && deathScreen.activeSelf == false)
         {
@@ -61,6 +60,12 @@ public class PlayerUI : MonoBehaviour
             deathscreenfade -= Time.deltaTime;
             if (deathscreenfade < 0.2f) { deathscreenfade = 0.2f; }
         }
+
+        hurtEffect.color = new Color(hurtEffect.color.r, hurtEffect.color.g, hurtEffect.color.b, hurtEffectTimer / healthman.invTime);
+
+        //timers
+        hurtEffectTimer -= Time.deltaTime;
+        if(hurtEffectTimer < 0) { hurtEffectTimer = 0; }
     }
     public void PlayerDied()
     {
@@ -79,6 +84,10 @@ public class PlayerUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+    }
+    public void OnHurt()
+    {
+        hurtEffectTimer = healthman.invTime;
     }
     public void Pause()
     {

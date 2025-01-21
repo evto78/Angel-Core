@@ -38,7 +38,7 @@ public class CrossbowScript : MonoBehaviour
     }
     void Update()
     {
-        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = charge / maxCharge;
+        //transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = charge / maxCharge;
 
         modifiedDmg = Mathf.RoundToInt(dmg * charge);
         chargeBlock.transform.localPosition = new Vector3(0, 0.02f, Mathf.Lerp(minChargeZPOS, maxChargeZPOS, charge/maxCharge));
@@ -46,8 +46,8 @@ public class CrossbowScript : MonoBehaviour
         if(charge < 0) { charge = 0; }
 
         //Manage UI
-        transform.GetComponentInParent<PlayerUI>().curBullets = curBul;
-        transform.GetComponentInParent<PlayerUI>().maxBullets = magSize;
+        //transform.GetComponentInParent<PlayerUI>().curBullets = curBul;
+        //transform.GetComponentInParent<PlayerUI>().maxBullets = magSize;
 
         //Manage Timers
         atkSpeedTimer -= Time.deltaTime;

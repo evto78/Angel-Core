@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-
+    public int dmg;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             Debug.Log("hit");
-            collision.gameObject.GetComponent<HealthManager>().DealDamage(1);
+            collision.gameObject.GetComponent<HealthManager>().DealDamage(dmg);
         }
     }
 }

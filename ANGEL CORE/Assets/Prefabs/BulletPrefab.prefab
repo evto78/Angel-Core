@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16680bda751237a46a0a8898939938a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmg: 10
 --- !u!114 &9117064978984746911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,3 +277,4 @@ MonoBehaviour:
   player: 0
   maxHealth: 1
   curHealth: 0
+  invTime: 0

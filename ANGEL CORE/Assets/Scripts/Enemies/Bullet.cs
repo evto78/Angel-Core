@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     Transform target;
     float DeathTimer = 20f;
 
-
+    public int dmg;
 
     void Start()
     {
@@ -51,10 +51,15 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) 
     {
-        bool tag = other.gameObject.CompareTag("boss ring");
-        if(tag == true)
+        string tag = other.gameObject.tag;
+        if(tag == "boss ring")
         {
 
+        }
+        else if (tag == "Player")
+        {
+            other.gameObject.GetComponent<HealthManager>().DealDamage(dmg);
+            Death();
         }
         else {Death();}
     }
