@@ -40,7 +40,7 @@ public class GruntAi : MonoBehaviour
         distance = Vector3.Distance(target.position, transform.position);
         hitbox.SetActive(attacking);
         if(distance > 3f) {MoveTo();}
-        Attack();
+        if(distance <= 4f) {Attack();}
         LookTo();
 
     }
@@ -69,7 +69,7 @@ public class GruntAi : MonoBehaviour
     {
         atkCooldown -= Time.deltaTime;
 
-        if(atkCooldown <= 0 && distance <= 4f) {attacking = true;}
+        if(atkCooldown <= 0) {attacking = true;}
         if(attacking) {atkTimer -= Time.deltaTime;}
         if(atkTimer <= 0) {attacking = false; atkCooldown = 1f; atkTimer = 0.5f;}
     }

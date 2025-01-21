@@ -9,9 +9,11 @@ public class BombSpawner : MonoBehaviour
     public GameObject PurityBombPrefab;
     bool sendIt; 
     UnityEvent ev_Purification;
+    Transform Spawner;
     // Start is called before the first frame update
     void Start()
     {
+        Spawner = GameObject.Find("BombSpawner").transform;
         sendIt = true;
         ev_Purification = new UnityEvent();
         ev_Purification.AddListener(ConfirmBombing);
@@ -31,7 +33,7 @@ public class BombSpawner : MonoBehaviour
     // the actual bomb
     void ConfirmBombing()
     {
-            GameObject bullet = Instantiate(PurityBombPrefab, transform.position, transform.rotation);
+            GameObject bullet = Instantiate(PurityBombPrefab, Spawner.position, transform.rotation);
             Debug.Log("BEAR WITNESS!!");
     }      
 }

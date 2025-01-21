@@ -1480,17 +1480,57 @@ PrefabInstance:
       propertyPath: jumpSparkParticles
       value: 
       objectReference: {fileID: 1269853016}
+    - target: {fileID: 2913891119960918520, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 151.30298
+      objectReference: {fileID: 0}
+    - target: {fileID: 2913891119960918520, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.003998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044469269486727864, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 151.30298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044469269486727864, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.003998
+      objectReference: {fileID: 0}
     - target: {fileID: 4106788453725009164, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: MaxDistance
       value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937568274927044500, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 38.611572
       objectReference: {fileID: 0}
     - target: {fileID: 5366558070798491885, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 27.003998
       objectReference: {fileID: 0}
+    - target: {fileID: 6074207114901379829, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -38.475098
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074207114901379829, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.995972
+      objectReference: {fileID: 0}
+    - target: {fileID: 6387338411850931191, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40.537598
+      objectReference: {fileID: 0}
     - target: {fileID: 6602857866310753672, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445119555343028135, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -38.475098
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445119555343028135, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.995972
       objectReference: {fileID: 0}
     - target: {fileID: 7886739543977407917, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8273,7 +8313,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1426385532}
-  - component: {fileID: 1426385533}
   m_Layer: 0
   m_Name: BombSpawner
   m_TagString: Untagged
@@ -8296,20 +8335,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1952340732}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1426385533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426385531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bad3f283f2a2d4ba131d75fb1a1001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bombing: 0
-  PurityBombPrefab: {fileID: 1239749591708430877, guid: 45379447bd25392438253f000c377275, type: 3}
 --- !u!1 &1426932927
 GameObject:
   m_ObjectHideFlags: 0
@@ -14230,6 +14255,7 @@ GameObject:
   - component: {fileID: 1952340734}
   - component: {fileID: 1952340735}
   - component: {fileID: 1952340736}
+  - component: {fileID: 1952340737}
   m_Layer: 6
   m_Name: Boss
   m_TagString: boss core
@@ -14345,6 +14371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 845298618}
   speed: 10
+  phase: 0
 --- !u!114 &1952340734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14399,6 +14426,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &1952340737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952340728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4bad3f283f2a2d4ba131d75fb1a1001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bombing: 0
+  PurityBombPrefab: {fileID: 1239749591708430877, guid: 45379447bd25392438253f000c377275, type: 3}
 --- !u!1 &1952902093
 GameObject:
   m_ObjectHideFlags: 0

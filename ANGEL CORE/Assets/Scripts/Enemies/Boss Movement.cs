@@ -20,12 +20,13 @@ public class BossMovement : MonoBehaviour
     public float speed;
     Transform target;
     private bool Bombing = false;
-    int phase = 0;
+    public int phase = 0;
+
 
 
     void Start()
     {
-        phase = 0;
+        phase = 1;
         healthman = GetComponent<HealthManager>();
 
         hasTarget = false;
@@ -55,21 +56,26 @@ public class BossMovement : MonoBehaviour
     void Update()
     {
         healthBar.fillAmount = healthman.curHealth * 1f / healthman.maxHealth * 1f;
-        if(healthman.curHealth <= healthman.maxHealth)
+
+        switch(phase)
         {
-            phase = 1;
-
-        }
-
-        if (phase == 0)
-
-        {
+        case 1:
             GetTarget();
             MoveToTar();
+            break;
 
+        case 2:
+            Debug.Log("Summoning babies");
+            break;
+
+        case 3:
+            PurityBomb();
+            break;
         }
 
-        else{PurityBomb();}
+        
+
+
 
     }
 
@@ -106,11 +112,7 @@ public class BossMovement : MonoBehaviour
             MoveToTar();
             Debug.Log("moving to bomb");
         }
-        else
-        {
-
-            Bombing = true;
-        }
+        else { Bombing = true;}
     }
     
 }
