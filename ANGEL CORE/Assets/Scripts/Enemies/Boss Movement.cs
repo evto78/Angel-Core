@@ -19,7 +19,7 @@ public class BossMovement : MonoBehaviour
     float timer = 5f;
     public float speed;
     Transform target;
-    private bool Bombing = false;
+    public bool Bombing = false;
     public int phase = 0;
 
 

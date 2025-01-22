@@ -5,24 +5,24 @@ using UnityEngine;
 public class BombScript : MonoBehaviour
 {
     float deathTimer = 3f;
+    bool goDown;
+    GameObject bomba;
     // Start is called before the first frame update
     void Start()
     {
-        
+        bomba = GameObject.Find("PurityBomb");
     }
 
     // Update is called once per frame
     void Update()
     {
-    
-        transform.position += Vector3.down * 4 * Time.deltaTime;
+        
+        if(goDown)
+        {transform.position += Vector3.down * 4 * Time.deltaTime;}
         
     }
     private void OnCollisionEnter(Collision collision) 
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            
-        }
+        goDown = false;
     }
 }

@@ -5,25 +5,30 @@ using UnityEngine.Events;
 
 public class BombSpawner : MonoBehaviour
 {
-    [SerializeField] private bool Bombing;
+    BossMovement Bombing;
+    public GameObject bomber;
     public GameObject PurityBombPrefab;
     bool sendIt; 
     UnityEvent ev_Purification;
     Transform Spawner;
+    
     // Start is called before the first frame update
     void Start()
     {
+        Bombing = bomber.GetComponent<BossMovement>();
         Spawner = GameObject.Find("BombSpawner").transform;
         sendIt = true;
         ev_Purification = new UnityEvent();
         ev_Purification.AddListener(ConfirmBombing);
     }
 
+
     // Update is called once per frame
     void Update()
     {
+        
         //pre check so it only sends 1 bomb
-        if(Bombing && sendIt)
+        if(Bombing.Bombing && sendIt)
         {
             ev_Purification.Invoke();
             Debug.Log("bah");
@@ -33,8 +38,8 @@ public class BombSpawner : MonoBehaviour
     // the actual bomb
     void ConfirmBombing()
     {
-            GameObject bullet = Instantiate(PurityBombPrefab, Spawner.position, transform.rotation);
-            Debug.Log("BEAR WITNESS!!");
+            Instantiate(PurityBombPrefab, Spawner.position, transform.rotation);
+            Debug.Log("Bomb spawned");
     }      
 }
 
