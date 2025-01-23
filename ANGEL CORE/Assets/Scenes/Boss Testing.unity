@@ -1181,13 +1181,21 @@ PrefabInstance:
       propertyPath: jumpSparkParticles
       value: 
       objectReference: {fileID: 1269853016}
+    - target: {fileID: 1455921985731253800, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694543844930410619, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2913891119960918520, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 151.30298
       objectReference: {fileID: 0}
     - target: {fileID: 2913891119960918520, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.004028
+      value: 27.003998
       objectReference: {fileID: 0}
     - target: {fileID: 4044469269486727864, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1195,11 +1203,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044469269486727864, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.004028
+      value: 27.003998
       objectReference: {fileID: 0}
     - target: {fileID: 4106788453725009164, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: MaxDistance
       value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470811665038061746, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4937568274927044500, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1272,6 +1284,14 @@ PrefabInstance:
     - target: {fileID: 7886739543977407917, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124257259655627336, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: meleeDmg
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124257259655627336, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: meleeKnock
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

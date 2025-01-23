@@ -12,6 +12,13 @@ public class HeavyRifleScript : MonoBehaviour
 
     public GameObject hitEffect;
 
+    public GameObject spinnyBit;
+    public GameObject chargeBlock;
+    public GameObject bolt;
+
+    public float minChargeZPOS;
+    public float maxChargeZPOS;
+
     //Gun Stats
     public float atkSpeed;
     public float relSpeed;
@@ -24,32 +31,59 @@ public class HeavyRifleScript : MonoBehaviour
     float relTimer;
     float atkSpeedTimer;
 
+    public float crossChargeMax;
+    float crossCharge;
+    public int crossDmg;
+    bool crossReady;
+    float spinSpeed;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         lr = GetComponent<LineRenderer>();
         curBul = magSize;
+        crossReady = true;
         reloading = false;
     }
     void Update()
     {
-        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = 0;
+        transform.GetComponentInParent<PlayerUI>().radialCharge.fillAmount = crossCharge / crossChargeMax;
 
         if (lineTimer > 0f) { lineTimer -= Time.deltaTime * atkSpeed; if (lineTimer < 0f) { lineTimer = 0f; } }
         lr.startWidth = lineTimer;
         lr.endWidth = lineTimer;
 
+        chargeBlock.transform.localPosition = new Vector3(0, 0.02f, Mathf.Lerp(minChargeZPOS, maxChargeZPOS, crossCharge / crossChargeMax));
+        spinnyBit.transform.Rotate(Vector3.right * spinSpeed * 400 * Time.deltaTime);
+
         //Manage UI
         transform.GetComponentInParent<PlayerUI>().curBullets = curBul;
         transform.GetComponentInParent<PlayerUI>().maxBullets = magSize;
 
+        if (crossReady)
+        {
+            chargeBlock.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            chargeBlock.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
         //Manage Timers
         relTimer -= Time.deltaTime;
-        if (relTimer < 0 && reloading == true) { reloading = false; curBul = magSize; animator.SetBool("Reloading", false); }
+        if (relTimer < 0 && reloading == true) { crossReady = true; reloading = false; curBul = magSize; animator.SetBool("Reloading", false); }
         atkSpeedTimer -= Time.deltaTime;
+        crossCharge -= Time.deltaTime;
+        if(crossCharge < 0) { crossCharge = 0; }
+        if(crossCharge > crossChargeMax) { crossCharge = crossChargeMax; }
+        spinSpeed -= Time.deltaTime;
+        if(spinSpeed < -1) { spinSpeed = -1; }
+        if(spinSpeed > 2) { spinSpeed = 2; }
     }
     public void AttemptShoot()
     {
+
+        crossCharge += Time.deltaTime / 2f;
         if (relTimer < 0 && atkSpeedTimer < 0 && curBul > 0)
         {
             curBul--;
@@ -62,6 +96,9 @@ public class HeavyRifleScript : MonoBehaviour
     }
     void Shoot()
     {
+        spinSpeed += 2;
+        crossCharge += 2;
+
         atkSpeedTimer = 1 / atkSpeed;
 
         animator.speed = 1 * atkSpeed;
@@ -104,6 +141,33 @@ public class HeavyRifleScript : MonoBehaviour
         {
             linePoints.Add(firePoint.position + direction * 9999);
             RenderLine();
+        }
+    }
+
+    public void AttemptAltShoot()
+    {
+        if (crossReady && !reloading)
+        {
+            crossReady = false;
+
+            GameObject spawnedBolt = Instantiate(bolt);
+            spawnedBolt.transform.position = firePoint.transform.position;
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                spawnedBolt.transform.LookAt(hit.point);
+            }
+            else
+            {
+                spawnedBolt.transform.rotation = transform.rotation;
+            }
+            spawnedBolt.GetComponent<Rigidbody>().AddForce(spawnedBolt.transform.forward * crossCharge * 2500);
+            spawnedBolt.GetComponent<BoltScript>().dmg = Mathf.RoundToInt(crossDmg * crossCharge);
+
+            crossCharge = 0;
         }
     }
 

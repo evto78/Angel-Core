@@ -381,10 +381,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3099658464652576267}
-  - component: {fileID: 2996462717211306821}
   - component: {fileID: 2922227434399423322}
   - component: {fileID: 8196688827139223217}
-  - component: {fileID: 3635241938965359063}
   m_Layer: 0
   m_Name: CrossbowTEMP (1)
   m_TagString: Untagged
@@ -410,29 +408,6 @@ Transform:
   - {fileID: 369648982207507178}
   m_Father: {fileID: 2269719626655009938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2996462717211306821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241089389591610998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62e273eb75ee8c04ba4ede316cb235d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 475793421649138607}
-  spinnyBit: {fileID: 1043651255830757969}
-  chargeBlock: {fileID: 4903667482938808047}
-  bolt: {fileID: 634762923523178757, guid: ae29059f45c020c499aeb5aa248800b7, type: 3}
-  atkSpeed: 2
-  magSize: 1
-  dmg: 30
-  chargeEffectiveness: 20
-  maxCharge: 3
-  minChargeZPOS: 0.06
-  maxChargeZPOS: 0.02
 --- !u!33 &2922227434399423322
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -483,27 +458,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &3635241938965359063
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241089389591610998}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ef6b51a12b1023c4d84869e5f6ca145f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &680634927614095904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,7 +1558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2269719626655009938
 Transform:
   m_ObjectHideFlags: 0
@@ -1636,11 +1590,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 8257990973531523113}
   hitEffect: {fileID: 1940651747947740006, guid: e059f718739b4074797ac1bdcbc48408, type: 3}
+  spinnyBit: {fileID: 1043651255830757969}
+  chargeBlock: {fileID: 4903667482938808047}
+  bolt: {fileID: 634762923523178757, guid: ae29059f45c020c499aeb5aa248800b7, type: 3}
+  minChargeZPOS: 0.06
+  maxChargeZPOS: 0.02
   atkSpeed: 0.8
   relSpeed: 0.2
   magSize: 20
   dmg: 32
   spread: 0
+  crossChargeMax: 6
+  crossDmg: 40
 --- !u!33 &2940976368353936183
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3435,6 +3396,7 @@ MonoBehaviour:
   firePoint: {fileID: 3199001818555498569}
   spinnyTubes: {fileID: 5089191129540677871}
   hitEffect: {fileID: 1940651747947740006, guid: d9c79398003371843ab5ed712b63f55b, type: 3}
+  hitBox: {fileID: 3243241157119041334, guid: 280fcdb5e8b0bf442b7210a13146b59a, type: 3}
   atkSpeed: 5
   relSpeed: 0.2
   magSize: 80
@@ -3442,6 +3404,9 @@ MonoBehaviour:
   spread: 0.01
   maxCharge: 6
   chargeEffectiveness: 0.5
+  meleeDmg: 2
+  meleeKnock: 510
+  hitboxSpawnRate: 0.1
 --- !u!33 &1837743938601323876
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5182,7 +5147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3837158319067523592
 Transform:
   m_ObjectHideFlags: 0
@@ -5562,7 +5527,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.019, z: 0.0603}
   m_LocalScale: {x: -0.0046780193, y: -0.01388904, z: -0.0046780193}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7461764508665211322}
   m_Father: {fileID: 3099658464652576267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6534483793529947959
@@ -9996,6 +9962,89 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8295149090695301349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7461764508665211322}
+  - component: {fileID: 8898712121982854825}
+  - component: {fileID: 2663782331542179251}
+  m_Layer: 0
+  m_Name: Bolt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7461764508665211322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295149090695301349}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.29, z: -4.19}
+  m_LocalScale: {x: 0.31, y: 0.31, z: 7.596487}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 369648982207507178}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8898712121982854825
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295149090695301349}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2663782331542179251
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295149090695301349}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 801180396a9c8d24783a293c9c006638, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8344565500432884486
 GameObject:
   m_ObjectHideFlags: 0

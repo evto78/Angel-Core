@@ -12,6 +12,7 @@ public class GattlyGunScript : MonoBehaviour
     public GameObject spinnyTubes;
 
     public GameObject hitEffect;
+    public GameObject hitBox;
 
     //Gun Stats
     public float atkSpeed;
@@ -31,6 +32,11 @@ public class GattlyGunScript : MonoBehaviour
     public float chargeEffectiveness;
     float modifiedAtkSpd;
 
+    bool revving;
+    public int meleeDmg;
+    public float meleeKnock;
+    public float hitboxSpawnRate;
+    float hitboxSpawnTimer;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -66,24 +72,28 @@ public class GattlyGunScript : MonoBehaviour
         modifiedSpread = spread * (charge * chargeEffectiveness);
         modifiedAtkSpd = atkSpeed * (charge * chargeEffectiveness);
         spinnyTubes.transform.Rotate(Vector3.forward * charge * 200f * Time.deltaTime);
+        hitboxSpawnTimer -= Time.deltaTime * charge;
     }
     public void AttemptShoot()
     {
-        //charge up gattlygun
-        if (charge < maxCharge && !reloading)
+        if (!revving)
         {
-            charge += Time.deltaTime * 2;
-            modifiedAtkSpd = atkSpeed * (charge * chargeEffectiveness);
-        }
+            //charge up gattlygun
+            if (charge < maxCharge && !reloading)
+            {
+                charge += Time.deltaTime * 2;
+                modifiedAtkSpd = atkSpeed * (charge * chargeEffectiveness);
+            }
 
-        if (relTimer < 0 && atkSpeedTimer < 0 && curBul > 0)
-        {
-            curBul--;
-            Shoot();
-        }
-        else if (relTimer < 0 && atkSpeedTimer < 0 && curBul == 0)
-        {
-            AttemptReload();
+            if (relTimer < 0 && atkSpeedTimer < 0 && curBul > 0)
+            {
+                curBul--;
+                Shoot();
+            }
+            else if (relTimer < 0 && atkSpeedTimer < 0 && curBul == 0)
+            {
+                AttemptReload();
+            }
         }
     }
     void Shoot()
@@ -134,12 +144,26 @@ public class GattlyGunScript : MonoBehaviour
     }
     public void AttemptAltShoot()
     {
+        revving = true;
         charge += Time.deltaTime * 4f;
         animator.SetBool("Revving", true);
         animator.speed = (charge + 1f) / (maxCharge);
+
+        if(hitboxSpawnTimer < 0)
+        {
+            GameObject spawnedHitbox = Instantiate(hitBox);
+            spawnedHitbox.transform.position = transform.position;
+            spawnedHitbox.transform.rotation = Camera.main.transform.rotation;
+            //spawnedHitbox.transform.Translate(spawnedHitbox.transform.forward*2);
+
+            spawnedHitbox.GetComponent<HitBoxGattly>().dmg = meleeDmg;
+            spawnedHitbox.GetComponent<HitBoxGattly>().knockback = meleeKnock;
+            hitboxSpawnTimer = hitboxSpawnRate;
+        }
     }
     public void AttemptAltShootUp()
     {
+        revving = false;
         animator.SetBool("Revving", false);
     }
     Vector3 GetDir()

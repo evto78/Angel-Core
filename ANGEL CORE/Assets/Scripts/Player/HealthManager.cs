@@ -36,7 +36,10 @@ public class HealthManager : MonoBehaviour
             curHealth -= dmgAmt;
             if (curHealth < 1) { Death(); }
             invTimer = invTime;
-            uiMan.OnHurt();
+            if (player)
+            {
+                uiMan.OnHurt();
+            }
         }
     }
     public void Heal(int healAmt)
