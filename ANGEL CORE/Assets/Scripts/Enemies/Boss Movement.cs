@@ -1,7 +1,9 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,15 +22,17 @@ public class BossMovement : MonoBehaviour
     public float speed;
     Transform target;
     public bool Bombing = false;
-    public int phase = 0;
+    public bool p1 = true;
+    bool p2 = false;
+    public bool p3 = false;
+    float hp;
 
 
 
     void Start()
     {
-        phase = 1;
         healthman = GetComponent<HealthManager>();
-
+        hp = healthman.curHealth;
         hasTarget = false;
 
         pointHolder = GameObject.Find("RoamPoints");
@@ -56,23 +60,20 @@ public class BossMovement : MonoBehaviour
     void Update()
     {
         healthBar.fillAmount = healthman.curHealth * 1f / healthman.maxHealth * 1f;
-
-        switch(phase)
+        
+        if(p1)
         {
-        case 1:
-            GetTarget();
             MoveToTar();
-            break;
-
-        case 2:
-            Debug.Log("Summoning babies");
-            break;
-
-        case 3:
-            PurityBomb();
-            break;
+            GetTarget();
         }
-
+        if(p2)
+        {
+            
+        }
+        if(p3)
+        {
+            PurityBomb();
+        }
         
 
 
@@ -104,6 +105,10 @@ public class BossMovement : MonoBehaviour
 
 
     }
+    void spawnBabies()
+    {
+
+    }
     void PurityBomb()
     {
         targetLocation = new Vector3(0,transform.position.y,0);
@@ -114,5 +119,6 @@ public class BossMovement : MonoBehaviour
         }
         else { Bombing = true;}
     }
+
     
 }

@@ -11,6 +11,7 @@ public class BombSpawner : MonoBehaviour
     bool sendIt; 
     UnityEvent ev_Purification;
     Transform Spawner;
+    public bool lightSwitch;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class BombSpawner : MonoBehaviour
         sendIt = true;
         ev_Purification = new UnityEvent();
         ev_Purification.AddListener(ConfirmBombing);
+        ev_Purification.AddListener(ChangeLight);
     }
 
 
@@ -41,5 +43,9 @@ public class BombSpawner : MonoBehaviour
             Instantiate(PurityBombPrefab, Spawner.position, transform.rotation);
             Debug.Log("Bomb spawned");
     }      
+    void ChangeLight()
+    {
+        lightSwitch = true;
+    }
 }
 

@@ -7,13 +7,13 @@ public class BombScript : MonoBehaviour
 {
     float deathTimer = 3f;
     bool goDown;
-    Transform Player;
+    GameObject Player;
     Ray ray;
     // Start is called before the first frame update
     void Start()
     {
         goDown = true;
-        Player = GameObject.Find("Player").transform;     
+        Player = GameObject.Find("Player");     
 
     }
 
@@ -26,7 +26,7 @@ public class BombScript : MonoBehaviour
         else
         {
             Debug.Log("touchdown");
-            Vector3 dir = Player.position - transform.position;
+            Vector3 dir = Player.transform.position - transform.position;
             Quaternion rotation = Quaternion.LookRotation(dir);
             transform.rotation = rotation;
             ray = new Ray(transform.position, transform.forward); 
@@ -36,6 +36,7 @@ public class BombScript : MonoBehaviour
                 {
                     Debug.Log("yay you died");
                     Destroy(gameObject, 0.2f);
+                    Player.GetComponent<HealthManager>().DealDamage(100);
                 }
                 else
                 {
