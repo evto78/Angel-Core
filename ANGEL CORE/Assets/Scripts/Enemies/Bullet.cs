@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     float startUpTimer = 2f;
     int spd = 20;
     Transform target;
-    float DeathTimer = 20f;
+    float DeathTimer = 10f;
 
     public int dmg;
 
