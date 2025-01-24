@@ -12,11 +12,13 @@ public class SwordBossMovement : MonoBehaviour
     public int phase;
     float hp;
     public bool _swingLock;
+    bool slashing;
 
 
 
     void Start()
     {
+        slashing = false;
         phase = 1;
         healthman = GetComponent<HealthManager>();
         hp = healthman.curHealth;
@@ -32,6 +34,10 @@ public class SwordBossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer -= Time.deltaTime;
+        
+
+
         if(_swingLock)
         {
             SwingLock();
@@ -46,6 +52,10 @@ public class SwordBossMovement : MonoBehaviour
     void SwingLock()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed);
+
+    }
+    void Poke()
+    {
 
     }
 
