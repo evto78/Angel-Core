@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
         Vector3 dir = (target.position - transform.position);
         Quaternion rotation = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation,  85 * Time.deltaTime);
-        transform.position += transform.forward * spd * Time.deltaTime;       
+        transform.position += transform.forward * spd * Time.deltaTime;
     }
     //kils itself
     void Death()

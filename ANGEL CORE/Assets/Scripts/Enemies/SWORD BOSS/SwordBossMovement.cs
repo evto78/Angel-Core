@@ -11,11 +11,14 @@ public class SwordBossMovement : MonoBehaviour
     float timer = 5f;
     public float speed;
     Transform target;
+    GameObject Player;
     public int phase;
     float hp;
     public bool _swingLock;
     bool slashing;
     bool hasTarget;
+    float AtkTimer = 2f;
+    public bool stuck;
 
 
 
@@ -32,7 +35,7 @@ public class SwordBossMovement : MonoBehaviour
         }
 
 
-        target = GameObject.Find("Player").transform;
+        Player = GameObject.Find("Player");
 
         target = GameObject.Find("Phase 1 Target").transform;
 
@@ -44,18 +47,20 @@ public class SwordBossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
         
-        if(!_swingLock)
+        if(!_swingLock && !stuck)
         {
             defaultMvmt();
             GetTarget();
+            Point();
         }
 
         if(_swingLock)
         {
             SwingLock();
+            AtkTimer -= Time.deltaTime;
         }
+
 
     }
 
@@ -63,7 +68,8 @@ public class SwordBossMovement : MonoBehaviour
     {
         if (hasTarget)
         {
-            transform.position = transform.position + (Vector3.Normalize(targetLocation - transform.position) * speed * Time.deltaTime);
+            transform.position = transform.position + (Vector3.Normalize(targetLocation - transform.position) * 50 * Time.deltaTime);
+
         }
     }
     void GetTarget()
@@ -84,6 +90,13 @@ public class SwordBossMovement : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed);
 
+    }
+    void Point()
+    {
+        Vector3 dir = (Player.transform.position - transform.position);
+        Quaternion rotation = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation,  85 * Time.deltaTime);
+        transform.position += transform.forward * 3 * Time.deltaTime;
     }
     void Poke()
     {
