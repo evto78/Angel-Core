@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class SwordBossMovement : MonoBehaviour
@@ -19,6 +20,10 @@ public class SwordBossMovement : MonoBehaviour
     bool hasTarget;
     float AtkTimer = 2f;
     public bool stuck;
+    public bool thrust;
+    float StuckTimer;
+    public bool normal = true;
+    public Vector3 lastPos;
 
 
 
@@ -48,7 +53,7 @@ public class SwordBossMovement : MonoBehaviour
     void Update()
     {
         
-        if(!_swingLock && !stuck)
+        if(normal && !_swingLock && !stuck)
         {
             defaultMvmt();
             GetTarget();
@@ -57,9 +62,38 @@ public class SwordBossMovement : MonoBehaviour
 
         if(_swingLock)
         {
+            lastPos = (Player.transform.position - transform.position);
+            normal = false;
             SwingLock();
+            Point();
             AtkTimer -= Time.deltaTime;
+            if(AtkTimer <= 0) {thrust = true; _swingLock = false; AtkTimer = 1f;}
         }
+        if(thrust)
+        {
+            AtkTimer -= Time.deltaTime;
+            Poke(lastPos);
+            if(AtkTimer <= 0)
+            {
+                stuck = true; thrust = false; AtkTimer = 2f; StuckTimer = 4f;
+            }
+        }
+        if(stuck)
+        {
+
+            StuckTimer -= Time.deltaTime;
+            if(StuckTimer <= 0)
+            {
+                AtkTimer -= Time.deltaTime;
+                transform.position += Vector3.back * 10 * Time.deltaTime;
+                if(AtkTimer <= 0)
+                {
+                    normal = true;
+                    stuck = false;
+                }
+            }
+        }
+
 
 
     }
@@ -90,6 +124,7 @@ public class SwordBossMovement : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed);
 
+
     }
     void Point()
     {
@@ -98,9 +133,11 @@ public class SwordBossMovement : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation,  85 * Time.deltaTime);
         transform.position += transform.forward * 3 * Time.deltaTime;
     }
-    void Poke()
-    {
 
+    void Poke(Vector3 dir)
+    {
+        transform.position += (Vector3.Normalize(lastPos) * 100 * Time.deltaTime);
+        AtkTimer -= Time.deltaTime;
     }
 
     void spawnBabies()
