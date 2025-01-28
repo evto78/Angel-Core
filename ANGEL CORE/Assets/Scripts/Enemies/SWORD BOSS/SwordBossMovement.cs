@@ -13,6 +13,8 @@ public class SwordBossMovement : MonoBehaviour
     public float speed;
     Transform target;
     GameObject Player;
+    public GameObject PopeBoss;
+    BossMovement BossScript;
     public int phase;
     float hp;
     public bool _swingLock;
@@ -24,11 +26,14 @@ public class SwordBossMovement : MonoBehaviour
     float StuckTimer;
     public bool normal = true;
     public Vector3 lastPos;
+    bool active = false;
 
 
 
     void Start()
     {
+        BossScript = PopeBoss.GetComponent<BossMovement>();
+        gameObject.SetActive(false);
         slashing = false;
         phase = 1;
         healthman = GetComponent<HealthManager>();
@@ -52,6 +57,11 @@ public class SwordBossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(BossScript.death && !active)
+        {
+            gameObject.SetActive(true);
+            active = true;
+        }
         
         if(normal && !_swingLock && !stuck)
         {
