@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,16 +17,19 @@ public class BossMovement : MonoBehaviour
     List<Vector3> bulletPoints = new List<Vector3>();
     GameObject bulHolder;
     GameObject pointHolder;
+    public GameObject GruntPrefab;
+    public GameObject WatcherPrefab;
+    float babyTimer = 3f;
     Vector3 targetLocation;
     bool hasTarget;
     float timer = 5f;
     public float speed;
     Transform target;
     public bool Bombing = false;
-    public bool p1 = true;
-    bool p2 = false;
-    public bool p3 = false;
+    public int phase = 1;
     float hp;
+    bool p2 = true;
+    public bool death = false;
 
 
 
@@ -60,21 +64,39 @@ public class BossMovement : MonoBehaviour
     void Update()
     {
         healthBar.fillAmount = healthman.curHealth * 1f / healthman.maxHealth * 1f;
+        if(healthman.curHealth <= 500 && p2)
+        {
+            Debug.Log("phase 2");
+            phase = 2;
+            p2 = false;
+        }
+        if(healthman.curHealth <= 150)
+        {
+            phase = 3;
+        }
+
+
         
-        if(p1)
+        if(phase == 1)
         {
             MoveToTar();
             GetTarget();
         }
-        if(p2)
+        if(phase == 2)
         {
-            
+            MoveToTar();
+            GetTarget();
+            spawnBabies();
+
         }
-        if(p3)
+        if(phase == 3)
         {
             PurityBomb();
         }
-        
+        if(healthman.curHealth <= 0)
+        {
+            death = true;
+        }
 
 
 
@@ -107,7 +129,20 @@ public class BossMovement : MonoBehaviour
     }
     void spawnBabies()
     {
-
+        babyTimer -= Time.deltaTime;
+        if(babyTimer <= 0)
+        {    
+            if(Random.Range(1,3) == 1)
+            {
+                GameObject watcher = Instantiate(WatcherPrefab, new Vector3(transform.position.x, (transform.position.y -25), transform.position.z), transform.rotation);
+                babyTimer = 5f;
+            }
+            else
+            {
+                GameObject grunt = Instantiate(GruntPrefab, new Vector3(transform.position.x, (transform.position.y -30), transform.position.z), transform.rotation);
+                babyTimer = 5f;
+            }
+        }
     }
     void PurityBomb()
     {

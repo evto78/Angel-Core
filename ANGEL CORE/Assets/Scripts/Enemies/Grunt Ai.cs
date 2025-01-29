@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore;
 
@@ -8,6 +10,8 @@ public class GruntAi : MonoBehaviour
 
 {
     float spd = 15;
+     GameObject boss;
+    BossMovement bossScript;
     Rigidbody rb;
     Transform target;
     Vector3 moveDirection;
@@ -28,7 +32,8 @@ public class GruntAi : MonoBehaviour
 
     void Start()
     {
-
+        boss = GameObject.Find("Boss");
+        bossScript = boss.GetComponent<BossMovement>();
         hitbox = GameObject.Find("Hitbox");
         hitbox.SetActive(false);
         target = GameObject.Find("Player").transform;
@@ -37,11 +42,20 @@ public class GruntAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(target.position, transform.position);
-        hitbox.SetActive(attacking);
-        if(distance > 3f) {MoveTo();}
-        if(distance <= 4f) {Attack();}
-        LookTo();
+        try
+            {
+            distance = Vector3.Distance(target.position, transform.position);
+            hitbox.SetActive(attacking);
+            if(distance > 3f) {MoveTo();}
+            if(distance <= 4f) {Attack();}
+            LookTo();
+            if(bossScript.death)
+            {
+                Destroy(gameObject);
+            }
+            }
+        catch (Exception e)
+        {Destroy(gameObject);}
 
     }
 
