@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RevolverScript : MonoBehaviour
 {
+    public RevolverSound soundMan;
+
     List<Vector3> linePoints = new List<Vector3>();
     float lineTimer;
     LineRenderer lr;
@@ -65,6 +67,7 @@ public class RevolverScript : MonoBehaviour
 
                 player.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
                 player.GetComponent<Rigidbody>().AddForce(Vector3.Normalize((spawnedAxeLastPos - player.transform.position)) * 15f * Vector3.Distance(player.transform.position, spawnedAxeLastPos));
+                soundMan.Yank();
             }
             else
             {
@@ -110,6 +113,7 @@ public class RevolverScript : MonoBehaviour
     }
     void Shoot()
     {
+        soundMan.Shoot();
         atkSpeedTimer = 1 / atkSpeed;
 
         animator.speed = 1 * atkSpeed;
@@ -169,6 +173,7 @@ public class RevolverScript : MonoBehaviour
     {
         if (!thrown && throwing)
         {
+            soundMan.Throw();
             throwing = false;
             thrown = true;
             thrownInvisTimer = 0.1f;
@@ -213,6 +218,7 @@ public class RevolverScript : MonoBehaviour
     }
     void Reload()
     {
+        soundMan.Reload();
         relTimer = 1 / relSpeed;
 
         animator.speed = 1 * relSpeed;

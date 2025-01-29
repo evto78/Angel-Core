@@ -28,7 +28,7 @@ public class Music : MonoBehaviour
             volume = PlayerPrefs.GetFloat("Music Volume") / 100f;
         }
 
-        aS.volume = volume;
+        aS.volume = volume * (PlayerPrefs.GetFloat("Master Volume") / 100f);
 
         aS.clip = intro;
         aS.loop = false;
@@ -39,13 +39,13 @@ public class Music : MonoBehaviour
     private void FixedUpdate()
     {
         volume = PlayerPrefs.GetFloat("Music Volume") / 100f;
-        aS.volume = volume;
+        aS.volume = volume * (PlayerPrefs.GetFloat("Master Volume") / 100f);
     }
 
     void Update()
     {
         volume = PlayerPrefs.GetFloat("Music Volume") / 100f;
-        aS.volume = volume;
+        aS.volume = volume * (PlayerPrefs.GetFloat("Master Volume") / 100f);
         if (introPlayed && !aS.isPlaying && !firstRunPlayed)
         {
             aS.Stop();
