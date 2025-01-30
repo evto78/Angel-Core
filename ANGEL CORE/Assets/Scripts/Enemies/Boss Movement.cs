@@ -93,7 +93,7 @@ public class BossMovement : MonoBehaviour
         {
             PurityBomb();
         }
-        if(healthman.curHealth <= 0)
+        if(healthman.curHealth <= 32)
         {
             death = true;
         }

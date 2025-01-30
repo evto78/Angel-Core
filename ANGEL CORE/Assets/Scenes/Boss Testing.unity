@@ -1967,6 +1967,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 236685873386663207, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 151.30298
+      objectReference: {fileID: 0}
+    - target: {fileID: 236685873386663207, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.004028
+      objectReference: {fileID: 0}
+    - target: {fileID: 307271532328411632, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 151.30298
+      objectReference: {fileID: 0}
+    - target: {fileID: 307271532328411632, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.004028
+      objectReference: {fileID: 0}
     - target: {fileID: 1271278614748567115, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: sparkParticles
       value: 
@@ -1997,7 +2013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2913891119960918520, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.003998
+      value: 27.004028
       objectReference: {fileID: 0}
     - target: {fileID: 3268798929831558486, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2009,7 +2025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044469269486727864, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 27.003998
+      value: 27.004028
       objectReference: {fileID: 0}
     - target: {fileID: 4096019560809376769, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2018,6 +2034,22 @@ PrefabInstance:
     - target: {fileID: 4106788453725009164, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: MaxDistance
       value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395889049024224134, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -38.475098
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395889049024224134, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.995972
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409862942687115331, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -38.475098
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409862942687115331, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.995972
       objectReference: {fileID: 0}
     - target: {fileID: 4470811665038061746, guid: 7936b516e8563454b8595ee9f0fe772a, type: 3}
       propertyPath: m_IsActive
@@ -10068,7 +10100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &1787509547
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10182,7 +10214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.3
-  PopeBoss: {fileID: 0}
+  PopeBoss: {fileID: 1952340728}
   phase: 0
   _swingLock: 0
   stuck: 0
@@ -15819,7 +15851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1952340729
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -16209,6 +16241,10 @@ PrefabInstance:
     - target: {fileID: 3367447923485601287, guid: 8ea3231d069cda6489e1278ec4e02617, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367447923485601287, guid: 8ea3231d069cda6489e1278ec4e02617, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6233555326865642503, guid: 8ea3231d069cda6489e1278ec4e02617, type: 3}
       propertyPath: m_LocalPosition.x

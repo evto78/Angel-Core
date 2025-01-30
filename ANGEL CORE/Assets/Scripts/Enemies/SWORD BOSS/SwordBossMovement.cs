@@ -32,8 +32,6 @@ public class SwordBossMovement : MonoBehaviour
 
     void Start()
     {
-        BossScript = PopeBoss.GetComponent<BossMovement>();
-        gameObject.SetActive(false);
         slashing = false;
         phase = 1;
         healthman = GetComponent<HealthManager>();
@@ -57,11 +55,6 @@ public class SwordBossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(BossScript.death && !active)
-        {
-            gameObject.SetActive(true);
-            active = true;
-        }
         
         if(normal && !_swingLock && !stuck)
         {
