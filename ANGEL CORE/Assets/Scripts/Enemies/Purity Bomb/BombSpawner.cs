@@ -12,6 +12,7 @@ public class BombSpawner : MonoBehaviour
     UnityEvent ev_Purification;
     Transform Spawner;
     public bool lightSwitch;
+    public bool Reverse;
     
     // Start is called before the first frame update
     void Start()
@@ -22,13 +23,14 @@ public class BombSpawner : MonoBehaviour
         ev_Purification = new UnityEvent();
         ev_Purification.AddListener(ConfirmBombing);
         ev_Purification.AddListener(ChangeLight);
+
     }
 
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {   
+
         //pre check so it only sends 1 bomb
         if(Bombing.Bombing && sendIt)
         {

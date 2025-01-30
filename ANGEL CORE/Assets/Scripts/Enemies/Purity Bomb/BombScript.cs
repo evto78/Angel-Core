@@ -9,10 +9,12 @@ public class BombScript : MonoBehaviour
     bool goDown;
     GameObject Player;
     Ray ray;
+    public bool finished;
     // Start is called before the first frame update
     void Start()
     {
         goDown = true;
+        finished = false;
         Player = GameObject.Find("Player");     
 
     }
@@ -41,6 +43,7 @@ public class BombScript : MonoBehaviour
                 else
                 {
                     Debug.Log("you survived");
+                    finished = true;
                     Destroy(gameObject, 0.2f);
                 }
             }
