@@ -25,13 +25,16 @@ public class SwordBossMovement : MonoBehaviour
     public bool thrust;
     float StuckTimer;
     public bool normal = true;
+
     public Vector3 lastPos;
     bool active = false;
+    bool started;
 
 
 
     void Start()
     {
+        started = false;
         slashing = false;
         phase = 1;
         healthman = GetComponent<HealthManager>();
@@ -55,8 +58,9 @@ public class SwordBossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(normal && !_swingLock && !stuck)
+        float distance = Vector3.Distance(Player.transform.position, transform.position);
+        if(distance <= 100f){started = true;}
+        if(normal && !_swingLock && !stuck && started)
         {
             defaultMvmt();
             GetTarget();
